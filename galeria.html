@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Galería de Archivo - Jose Luis Arriola</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            background-color: transparent;
+            color: #e0e0e0;
+            font-family: 'Courier Prime', monospace;
+            padding: 20px;
+            margin: 0;
+        }
+
+        /* Estilo personalizado para el scrollbar para que sea vintage */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #1a0f08;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #4e342e;
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #ffb347;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .media-item {
+            background: #2d1b0e;
+            border: 4px solid #3d2b1f;
+            padding: 10px;
+            transition: transform 0.3s ease, border-color 0.3s ease;
+            cursor: pointer;
+        }
+
+        .media-item:hover {
+            transform: scale(1.02);
+            border-color: #ffb347;
+        }
+
+        .media-item img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            filter: sepia(0.3) contrast(1.1);
+            transition: filter 0.3s ease;
+        }
+
+        .media-item:hover img {
+            filter: sepia(0);
+        }
+
+        .media-caption {
+            margin-top: 10px;
+            font-size: 0.75rem;
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #8d6e63;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="gallery-grid">
+        <!-- Item 1 -->
+        <div class="media-item">
+            <img src="img/img_01.jpg" alt="Concierto en vivo">
+            <div class="media-caption">Concierto en vivo - 2024</div>
+        </div>
+
+        <!-- Item 2 -->
+        <div class="media-item">
+            <img src="img/img_02.jpg" alt="Sesión de Grabación">
+            <div class="media-caption">Grabación de "Mudanza"</div>
+        </div>
+
+        <!-- Item 3 -->
+        <div class="media-item">
+            <img src="img/img_03.jpg" alt="Microfono Vintage">
+            <div class="media-caption">Estudio Analógico</div>
+        </div>
+
+        <!-- Item 4 -->
+        <div class="media-item">
+            <img src="img/img_04.jpg" alt="Gira Nacional">
+            <div class="media-caption">Gira Montevideo</div>
+        </div>
+
+        <!-- Item 5 -->
+        <div class="media-item">
+            <img src="img/img_05.jpg" alt="Ensayo">
+            <div class="media-caption">Ensayos con banda</div>
+        </div>
+
+        <!-- Item 6 -->
+        <div class="media-item">
+            <img src="img/img_06.jpg" alt="Presentación Acústica">
+            <div class="media-caption">Acústico Sala Zitarrosa</div>
+        </div>
+
+        <!-- Item 7 -->
+        <div class="media-item">
+            <img src="img/img_07.jpg" alt="Guitarra">
+            <div class="media-caption">Composiciones 2025</div>
+        </div>
+
+    </div>
+
+</body>
+
+</html>
