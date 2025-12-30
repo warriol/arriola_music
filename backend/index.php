@@ -17,22 +17,25 @@ $uri = trim($uri, '/');
 // Suponiendo que la URL es midominio.com/backend/entidad/accion
 $parts = explode('/', $uri);
 
-// Como este archivo está en /backend, omitimos esa parte de la URI
-// Buscamos las partes después de 'backend'
+// Buscamos la posición de 'backend' en la URL para extraer lo que sigue
 $key = array_search('backend', $parts);
+
+if ($key === false) {
+    // Si 'backend' no está en la URL, algo va mal con la petición
+    header("HTTP/1.1 400 Bad Request");
+    exit("Error de sintonía: URI mal formada.");
+}
+
 $entidad = $parts[$key + 1] ?? null;
 $accion = $parts[$key + 2] ?? 'index';
 
 if (!$entidad) {
-    // Si no hay entidad, mostramos el formulario de login o error
-    // Por seguridad, si no conocen la URL exacta, podemos enviar un 404 falso
     header("HTTP/1.1 404 Not Found");
-    exit("Acceso restringido.");
+    exit("Acceso restringido: Indica una frecuencia válida.");
 }
 
 /**
  * Lógica de Ruteo Dinámico
- * Se instancia el controlador correspondiente y se ejecuta la acción.
  */
 $controllerName = ucfirst($entidad) . 'Controller';
 
@@ -41,8 +44,9 @@ if (class_exists($controllerName)) {
     if (method_exists($controller, $accion)) {
         $controller->$accion();
     } else {
-        echo "Acción no sintonizada.";
+        echo "Acción ($accion) no sintonizada en el dial de $controllerName.";
     }
 } else {
-    echo "Frecuencia no encontrada.";
+    // Si llegamos aquí, el Autoload falló o el nombre de la clase no coincide con el archivo
+    echo "Frecuencia no encontrada: No se pudo cargar la clase '$controllerName'.";
 }

@@ -29,7 +29,7 @@ function desencriptarTexto($textoEncriptado, $clave)
 
 // Inicializar variables
 $textoEncriptado = "";
-$clave = 'clave_secreta'; // La clave debe ser segura y no predecible
+$clave = 'josearriola'; // La clave debe ser segura y no predecible
 
 // Verificar si el formulario ha sido enviado para encriptar
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['texto'])) {
