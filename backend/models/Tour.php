@@ -4,6 +4,7 @@
  * Descripción: Modelo para gestionar la tabla 'tour'.
  */
 use class\Config;
+
 class Tour extends Config {
 
     private $db;
