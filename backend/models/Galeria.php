@@ -18,9 +18,6 @@ class Galeria extends \class\Config {
         return $this->secretKey;
     }
 
-    /**
-     * Lista las imágenes de la galería
-     */
     public function listar($soloVisibles = true) {
         try {
             $sql = "SELECT * FROM galeria";
@@ -37,9 +34,6 @@ class Galeria extends \class\Config {
         }
     }
 
-    /**
-     * Guarda el nombre de la imagen y su pie de foto
-     */
     public function crear($datos) {
         try {
             $sql = "INSERT INTO galeria (url_imagen, pie_de_foto, visible) VALUES (:url, :pie, :vis)";

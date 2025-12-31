@@ -14,10 +14,6 @@ class Tour extends Config {
         $this->db = parent::getConexion();
     }
 
-    /**
-     * Obtiene todos los eventos de tour
-     * @param bool $soloVisibles Filtrar solo los marcados como visibles
-     */
     public function listar($soloVisibles = true) {
         $sql = "SELECT * FROM tour";
         if ($soloVisibles) {
@@ -34,9 +30,6 @@ class Tour extends Config {
         return $stmt->fetchAll();
     }
 
-    /**
-     * Crea un nuevo evento de tour
-     */
     public function crear($datos) {
         $sql = "INSERT INTO tour (fecha, lugar, descripcion, direccion, url_tickets, hashtag, visible) 
                 VALUES (:fecha, :lugar, :descripcion, :direccion, :url_tickets, :hashtag, :visible)";
@@ -53,9 +46,6 @@ class Tour extends Config {
         ]);
     }
 
-    /**
-     * Actualiza un evento existente
-     */
     public function actualizar($id, $datos) {
         $sql = "UPDATE tour SET 
                 fecha = :fecha, lugar = :lugar, descripcion = :descripcion, 
@@ -68,9 +58,6 @@ class Tour extends Config {
         return $stmt->execute($datos);
     }
 
-    /**
-     * Elimina un evento
-     */
     public function eliminar($id) {
         $sql = "DELETE FROM tour WHERE id = :id";
         $stmt = $this->db->prepare($sql);

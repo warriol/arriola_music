@@ -28,10 +28,6 @@ class Session
         return $_SESSION[$key] ?? null;
     }
 
-    /**
-     * Valida si el usuario está autenticado comprobando el token
-     * generado a partir de la SECRET_KEY.
-     */
     public static function check($secretKey): bool
     {
         self::start();

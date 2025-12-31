@@ -11,18 +11,12 @@ class ConfiguracionController {
         $this->modelo = new Configuracion();
     }
 
-    /**
-     * Devuelve todos los ajustes en JSON
-     */
     public function listar() {
         header('Content-Type: application/json');
         $datos = $this->modelo->obtenerTodos();
         echo json_encode(["status" => "success", "data" => $datos]);
     }
 
-    /**
-     * Procesa la actualización masiva de ajustes
-     */
     public function guardar() {
         header('Content-Type: application/json');
 

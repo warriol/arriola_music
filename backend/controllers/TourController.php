@@ -12,10 +12,6 @@ class TourController {
         $this->modelo = new Tour();
     }
 
-    /**
-     * Acción por defecto: Listar eventos
-     * Ruta: /backend/tour/index o /backend/tour/listar
-     */
     public function index() {
         $this->listar();
     }
@@ -47,9 +43,6 @@ class TourController {
         ]);
     }
 
-    /**
-     * Ejemplo de acción para obtener un solo evento
-     */
     public function obtener() {
         $id = $_GET['id'] ?? null;
         if (!$id) {
@@ -61,10 +54,6 @@ class TourController {
         echo json_encode(["status" => "success", "data" => $evento]);
     }
 
-    /**
-     * Acción para guardar un nuevo tour (POST)
-     * Ruta: /backend/tour/guardar
-     */
     public function guardar() {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             // Aquí se debería validar el token con la SECRET_KEY de la clase Config
@@ -76,10 +65,6 @@ class TourController {
         }
     }
 
-    /**
-     * Acción para eliminar (GET/POST)
-     * Ruta: /backend/tour/borrar/ID
-     */
     public function borrar() {
         // En tu index.php, podrías pasar el ID como parte de la URI
         // Aquí lo capturamos (dependiendo de cómo ajustes el router)

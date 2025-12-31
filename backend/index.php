@@ -34,9 +34,7 @@ if (!$entidad) {
     exit("Acceso restringido: Indica una frecuencia válida.");
 }
 
-/**
- * Lógica de Ruteo Dinámico
- */
+
 $controllerName = ucfirst($entidad) . 'Controller';
 
 if (class_exists($controllerName)) {

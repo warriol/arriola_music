@@ -20,9 +20,6 @@ class Usuario extends Config
         return $this->secretKey;
     }
 
-    /**
-     * Busca un usuario por su nombre de usuario.
-     */
     public function buscarPorUsername($username)
     {
         try {
@@ -36,9 +33,6 @@ class Usuario extends Config
         }
     }
 
-    /**
-     * Crea un nuevo usuario con la contraseña ya hasheada
-     */
     public function crear($username, $passwordHash, $email = '') {
         try {
             $sql = "INSERT INTO usuarios (username, password, email) VALUES (:user, :pass, :email)";
@@ -54,9 +48,6 @@ class Usuario extends Config
         }
     }
 
-    /**
-     * Actualiza la fecha del último acceso.
-     */
     public function registrarLogin($id)
     {
         $sql = "UPDATE usuarios SET ultimo_login = NOW() WHERE id = :id";

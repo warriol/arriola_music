@@ -13,9 +13,6 @@ class Configuracion extends \class\Config {
         $this->conexion = parent::getConexion();
     }
 
-    /**
-     * Obtiene todos los ajustes de la base de datos
-     */
     public function obtenerTodos() {
         try {
             $sql = "SELECT * FROM configuracion";
@@ -35,9 +32,6 @@ class Configuracion extends \class\Config {
         }
     }
 
-    /**
-     * Actualiza o inserta un valor de configuración
-     */
     public function actualizar($clave, $valor) {
         try {
             $sql = "INSERT INTO configuracion (clave, valor) VALUES (:clave, :valor) 

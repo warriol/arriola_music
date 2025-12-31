@@ -18,9 +18,6 @@ class GaleriaController {
         echo json_encode(["status" => "success", "data" => $datos]);
     }
 
-    /**
-     * Procesa la subida de la imagen y guarda en BD
-     */
     public function guardar() {
         header('Content-Type: application/json');
 
