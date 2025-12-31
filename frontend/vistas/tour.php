@@ -1,3 +1,27 @@
+<?php
+/**
+ * SECCIÓN 03: TOUR (ID: s3)
+ * Descripción: Muestra las fechas de conciertos sintonizadas desde la base de datos.
+ */
+
+// Instanciamos el modelo de Tour
+$tourModel = new Tour();
+
+// Obtenemos solo los eventos marcados como visibles
+$eventos = $tourModel->listar(true);
+
+/**
+ * Función auxiliar para formatear fechas de MySQL a formato vintage (DD MES YYYY)
+ */
+function formatearFechaVintage($fecha) {
+    $meses = ["ENE", "FEB", "MAR", "ABR", "MAY", "JUN", "JUL", "AGO", "SEP", "OCT", "NOV", "DIC"];
+    $time = strtotime($fecha);
+    $dia = date('d', $time);
+    $mes = $meses[date('n', $time) - 1];
+    $anio = date('Y', $time);
+    return "$dia $mes $anio";
+}
+?>
 <!-- SECCIÓN 03: TOUR (ID: s3) -->
 <section id="s3">
     <h2
@@ -14,32 +38,51 @@
                 </tr>
             </thead>
             <tbody>
-                <!-- Evento Pasado -->
-                <tr class="tour-row opacity-60">
-                    <td class="tour-date">04 DIC 2025</td>
-                    <td class="tour-venue-info">
-                        <b>Complejo Teatral Itaca</b>
-                        <i>"La última mudanza de Jose Luis Arriola"</i>
-                        <span>Humahuaca 4027</span>
-                        <a href="https://maps.google.com/?q=Humahuaca+4027" target="_blank" class="tour-btn-map">📍
-                            Ubicación</a>
-                    </td>
-                    <td>
-                        <button class="btn-action btn-disabled">FINALIZADO</button>
-                    </td>
-                    <td>
-                        <a href="https://www.instagram.com/explore/tags/ultimamudanzajosearriola" target="_blank"
-                            class="btn-action block w-full bg-zinc-800">#ultimamudanza</a>
+            <?php if (empty($eventos)): ?>
+                <tr>
+                    <td colspan="4" class="text-center py-20 text-zinc-500 italic">
+                        Buscando frecuencias... Próximamente nuevas fechas.
                     </td>
                 </tr>
-                <!-- Evento Futuro -->
-                <tr class="tour-row">
-                    <td class="tour-date">15 JUL 2026</td>
-                    <td class="tour-venue-info"><b>La Trastienda</b><i>"Sintonía Nocturna"</i><span>Daniel Muñoz
-                            2049, Montevideo</span></td>
-                    <td><a href="#" class="btn-action block w-full">Comprar</a></td>
-                    <td><a href="#" class="btn-action block w-full bg-zinc-800">#JoseArriola</a></td>
-                </tr>
+            <?php else: ?>
+                <?php foreach ($eventos as $show):
+                    $esPasado = strtotime($show['fecha']) < strtotime(date('Y-m-d'));
+                    ?>
+                    <tr class="tour-row <?php echo $esPasado ? 'opacity-50' : ''; ?>">
+                        <td class="tour-date">
+                            <?php echo formatearFechaVintage($show['fecha']); ?>
+                        </td>
+                        <td class="tour-venue-info">
+                            <b><?php echo htmlspecialchars($show['lugar']); ?></b>
+                            <i>"<?php echo htmlspecialchars($show['descripcion']); ?>"</i>
+                            <span><?php echo htmlspecialchars($show['direccion']); ?></span>
+                            <?php if (!empty($show['direccion'])): ?>
+                                <a href="https://maps.google.com/?q=<?php echo urlencode($show['direccion']); ?>"
+                                   target="_blank" class="text-[10px] text-amber-600 hover:underline">📍 Ubicación</a>
+                            <?php endif; ?>
+                        </td>
+                        <td>
+                            <?php if ($esPasado): ?>
+                                <button class="btn-action btn-disabled uppercase">Finalizado</button>
+                            <?php elseif (!empty($show['url_tickets'])): ?>
+                                <a href="<?php echo $show['url_tickets']; ?>" target="_blank" class="btn-action block w-full">Comprar</a>
+                            <?php else: ?>
+                                <button class="btn-action btn-disabled uppercase">Próximamente</button>
+                            <?php endif; ?>
+                        </td>
+                        <td>
+                            <?php if (!empty($show['hashtag'])): ?>
+                                <a href="https://www.instagram.com/explore/tags/<?php echo str_replace('#', '', $show['hashtag']); ?>"
+                                   target="_blank" class="btn-action block w-full bg-zinc-800">
+                                    #<?php echo htmlspecialchars($show['hashtag']); ?>
+                                </a>
+                            <?php else: ?>
+                                <span class="text-zinc-700 text-[10px] text-center block italic">Sin señal social</span>
+                            <?php endif; ?>
+                        </td>
+                    </tr>
+                <?php endforeach; ?>
+            <?php endif; ?>
             </tbody>
         </table>
     </div>

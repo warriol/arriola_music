@@ -1,23 +1,18 @@
 <?php
 
 /**
- * Controlador AuthController
- * Gestiona el proceso de entrada y salida del sistema.
+ * ARCHIVO: backend/controllers/AuthController.php
+ * Descripción: Gestiona el inicio de sesión comparando hashes sha512.
  */
-class AuthController
-{
+
+class AuthController {
     private $modelo;
 
-    public function __construct()
-    {
+    public function __construct() {
         $this->modelo = new Usuario();
     }
 
-    /**
-     * Procesa el login (POST)
-     */
-    public function login()
-    {
+    public function login() {
         header('Content-Type: application/json');
 
         if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
@@ -26,19 +21,17 @@ class AuthController
         }
 
         $user = $_POST['username'] ?? '';
-        $pass = $_POST['password'] ?? '';
+        $passHash = $_POST['password'] ?? ''; // Recibimos el hash sha512 desde el cliente
 
         $usuarioData = $this->modelo->buscarPorUsername($user);
 
-        if ($usuarioData && password_verify($pass, $usuarioData['password'])) {
-            // Generamos token de seguridad usando la SECRET_KEY heredada del modelo
-            // (Accedemos a ella a través de una propiedad protegida si es necesario)
-            // Para simplificar, usamos la Session con los datos del usuario.
+        // Comparamos el hash enviado con el de la base de datos
+        if ($usuarioData && $passHash === $usuarioData['password']) {
 
             \class\Session::set('user_id', $usuarioData['id']);
             \class\Session::set('username', $usuarioData['username']);
 
-            // Firma de seguridad del token
+            // Generamos token de sesión usando la secretKey de Config
             $token = hash_hmac('sha256', $usuarioData['id'] . $usuarioData['username'], $this->modelo->getSecretKey());
             \class\Session::set('auth_token', $token);
 
@@ -46,18 +39,17 @@ class AuthController
 
             echo json_encode([
                 "status" => "success",
-                "message" => "Acceso concedido",
-                "redirect" => "frontend/admin/dashboard.php"
+                "message" => "Sintonía establecida",
+                "redirect" => "dashboard.php"
             ]);
         } else {
             http_response_code(401);
-            echo json_encode(["status" => "error", "message" => "Credenciales inválidas"]);
+            echo json_encode(["status" => "error", "message" => "Credenciales incorrectas"]);
         }
     }
 
-    public function logout()
-    {
+    public function logout() {
         \class\Session::destroy();
-        header('Location: ../frontend/admin/login.php');
+        header('Location: ../../frontend/admin/login.php');
     }
 }

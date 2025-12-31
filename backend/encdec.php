@@ -61,6 +61,41 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['texto_encriptado'])) {
 <body>
     <h2>Formulario de Encriptación de Texto</h2>
 
+    <h3>
+        <?php
+            // Usa la misma llave que definiste en Config.php
+            $key = "josearriola";
+
+            function encriptarParaEnv($texto, $key) {
+                $ivLength = openssl_cipher_iv_length('aes-256-cbc');
+                $iv = openssl_random_pseudo_bytes($ivLength);
+                $cifrado = openssl_encrypt($texto, 'aes-256-cbc', $key, 0, $iv);
+                return base64_encode($iv . base64_decode($cifrado));
+            }
+
+        echo "Copia estos valores a tu archivo .env:<br><br>";
+        echo "DB_HOST=" . encriptarTexto("localhost", $key) . "<br>";
+        echo "DB_NAME=" . encriptarTexto("sintonia_artistica", $key) . "<br>";
+        echo "DB_USER=" . encriptarTexto("root", $key) . "<br>";
+        echo "DB_PASS=" . encriptarTexto("", $key) . "<br>";
+        echo "SECRET_KEY=" . encriptarTexto("arriola_music", $key) . "<br>";
+        echo "<hr>";
+
+        echo "<h2>Generador de Hash SHA512 (Para tu Base de Datos)</h2>";
+        $pass_a_hashear = "admin123"; // Cambia esto por tu contraseña deseada
+        $hash = hash('sha512', $pass_a_hashear);
+        echo "Contraseña plana: <b>$pass_a_hashear</b><br>";
+        echo "Hash SHA512: <code style='background:#eee; padding:5px;'>$hash</code><br><br>";
+        echo "SQL para actualizar tu usuario:<br>";
+        echo "<pre>UPDATE usuarios SET password = '$hash', email = 'tu_nuevo_correo@mail.com' WHERE username = 'admin';</pre>";
+
+        echo "<hr>";
+
+        echo "<h2>Verificador de Conexión Actual</h2>";
+        echo "Si el sistema trae datos viejos, verifica que el <b>DB_NAME</b> arriba sea exactamente el que estás editando en tu gestor de DB.";
+            ?>
+    </h3>
+
     <!-- Formulario HTML para encriptar -->
     <form method="POST" action="">
         <label for="texto">Ingresa el texto a encriptar:</label><br>

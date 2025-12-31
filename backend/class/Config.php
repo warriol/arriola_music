@@ -40,7 +40,8 @@ abstract class Config
         if (file_exists($filePath)) {
             $lines = file($filePath, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
             foreach ($lines as $line) {
-                if (strpos(trim($line), '#') === 0) continue;
+                if (strpos(trim($line), '#') === 0)
+                    continue;
 
                 list($name, $value) = explode('=', $line, 2);
 
@@ -81,6 +82,7 @@ abstract class Config
         $textoEncriptado = substr($datos, $ivLength);
 
         $resultado = openssl_decrypt($textoEncriptado, 'aes-256-cbc', $this->key, 0, $iv);
+
         if ($resultado === false) {
             $this->debug("Error de OpenSSL", openssl_error_string());
             return '';
@@ -104,6 +106,11 @@ abstract class Config
     public function getConexion(): PDO
     {
         return $this->conexion;
+    }
+
+    public function getSecretKey(): string
+    {
+        return $this->secretKey;
     }
 
     public function debug($var, $val = '-'): void

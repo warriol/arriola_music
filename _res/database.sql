@@ -67,7 +67,7 @@ CREATE TABLE IF NOT EXISTS `galeria` (
 -- Usuario administrador por defecto (password: admin123)
 -- NOTA: En producción, esto debe cambiarse inmediatamente.
 INSERT INTO `usuarios` (`username`, `password`, `email`) VALUES 
-('admin', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'admin@example.com');
+('admin', '3c9909afec25354d551dae21590bb26e38d53f2173b8d3dc3eee4c047e7ab1c1eb8b85103e3be7ba613b31bb5c9c36214dc9f14a42fd7a2fdb84856bca5c44c2', 'admin@example.com');
 
 -- Configuración base
 INSERT INTO `configuracion` (`clave`, `valor`) VALUES 

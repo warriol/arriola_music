@@ -1,12 +1,24 @@
 <?php
 /**
  * ARCHIVO: index.php
- * Función: Orquestador principal del sitio. Carga los componentes del frontend.
+ * Función: Punto de entrada principal. Orquesta la carga de plantillas y vistas.
  */
 
-// Aquí más adelante incluiremos el archivo de configuración del backend
-// include_once 'backend/config/config.php';
+// Cargamos el motor del backend (Autoload y Configuración)
+// Usamos la ruta hacia el archivo de autoload que definimos
+require_once 'backend/autoload.php';
 
+/**
+ * Inicializamos la configuración global.
+ * Esto nos permitirá usar los ajustes (como el nombre del sitio) en los templates.
+ */
+try {
+    $configModel = new Configuracion();
+    $ajustes = $configModel->obtenerTodos();
+} catch (Exception $e) {
+    // En caso de error de conexión, podrías mostrar un mensaje sutil
+    $ajustes = [];
+}
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -14,11 +26,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description"
-        content="Presencia digital de Jose Luis Arriola, músico y compositor argentino. Su discografía, tour, redes y más.">
+    <meta name="description" content="Presencia digital de Jose Luis Arriola, músico y compositor argentino. Su discografía, tour, redes y más.">
     <meta name="keywords" content="Jose Luis Arriola, músico, compositor, argentino, discografía, tour, redes">
     <meta name="author" content="Wilson Denis Arriola">
-    <title>Jose Luis Arriola - Sintonía Artística</title>
+    <title><?php echo $ajustes['nombre_sitio'] ?? 'Jose Luis Arriola - Sintonía Artística'; ?></title>
     <!-- favicon -->
     <link rel="icon" href="media/img/favicon.png" type="image/x-icon">
     <!-- Tailwind CSS -->
