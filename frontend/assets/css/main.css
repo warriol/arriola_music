@@ -675,7 +675,7 @@
             }
 
             .bio-box h1 {
-                font-size: 2.5rem;
+                font-size: 1.5rem;
                 text-align: center;
             }
 
@@ -704,6 +704,31 @@
 
             .bottom-wood-base {
                 position: relative;
+            }
+
+            .artist-photo-frame {
+                display: none;
+            }
+            .gallery-viewport {
+                height: 70%;
+            }
+
+            .gallery-viewport > .gallery-container {
+                height: 100%;
+            }
+
+            .gallery-viewport > .gallery-container > .photo-card img {
+                height: 90%;
+                width: 95%;
+            }
+
+            .tour-table th:nth-child(4),
+            .tour-table td:nth-child(4) {
+                display: none;
+            }
+
+            .spotify-panel iframe {
+                height: 155px;
             }
 
             #s6 {

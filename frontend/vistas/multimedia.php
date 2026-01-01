@@ -12,11 +12,11 @@ $fotosMultimedia = $galeriaModel->listar(true);
 ?>
 <!-- SECCIÓN 05: MULTIMEDIA -->
 <section id="s5">
-    <div class="absolute top-24 text-center w-full">
-        <h2 class="text-3xl font-black mb-10 text-amber-600 tracking-widest bg-black/40 px-6 py-2 border-b-2 border-amber-900 uppercase">
-            Archivo Multimedia
-        </h2>
-    </div>
+
+    <h2 class="text-3xl font-black mb-10 text-amber-600 tracking-widest bg-black/40 px-6 py-2 border-b-2 border-amber-900">
+        ARCHIVO MULTIMEDIA
+    </h2>
+
 
     <!-- Frame del Monitor -->
     <div class="multimedia-monitor-frame mt-20">

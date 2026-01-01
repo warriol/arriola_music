@@ -6,7 +6,7 @@ RewriteRule ^ - [L]
 RewriteCond %{REQUEST_URI} /index\.php$ [NC]
 RewriteRule ^ - [L]
 
-RewriteCond %{REQUEST_URI} ^/frontend/admin/(login|configuracion|dashboard|galeria|tour)\.php$ [NC]
+RewriteCond %{REQUEST_URI} ^/frontend/admin/(login|configuracion|dashboard|galeria|tour|usuarios)\.php$ [NC]
 RewriteRule ^ - [L]
 
 RewriteCond %{REQUEST_URI} ^/$

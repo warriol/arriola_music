@@ -1,20 +1,15 @@
 RewriteEngine On
 
-# 1️⃣ Permitir archivos estáticos (INCLUYE MP3)
 RewriteCond %{REQUEST_URI} \.(css|js|png|jpg|jpeg|gif|svg|webp|ico|woff|woff2|ttf|mp3|wav|ogg)$ [NC]
 RewriteRule ^ - [L]
 
-# 2️⃣ Permitir index.php en cualquier carpeta
 RewriteCond %{REQUEST_URI} /arriola_music/index\.php$ [NC]
 RewriteRule ^ - [L]
 
-# 3️⃣ Permitir SOLO estos archivos de /admin
-RewriteCond %{REQUEST_URI} ^/arriola_music/frontend/admin/(login|configuracion|dashboard|galeria|tour)\.php$ [NC]
+RewriteCond %{REQUEST_URI} ^/arriola_music/frontend/admin/(login|configuracion|dashboard|galeria|tour|usuarios)\.php$ [NC]
 RewriteRule ^ - [L]
 
-# 4️⃣ Permitir root
-RewriteCond %{REQUEST_URI} ^/$
+RewriteCond %{REQUEST_URI} ^/arriola_music/$
 RewriteRule ^ - [L]
 
-# 5️⃣ TODO lo demás → home
 RewriteRule ^.*$ /arriola_music/index.php [L,R=302]

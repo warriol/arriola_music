@@ -154,7 +154,6 @@ $username = \class\Session::get('username');
     const tourModal = document.getElementById('tourModal');
     const tourForm = document.getElementById('tourForm');
 
-    // Cargar fechas al iniciar
     async function loadTours() {
         try {
             // Llamamos al controlador con modo admin para ver todo
