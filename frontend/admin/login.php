@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>Login - Panel Admin</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="icon" href="../../media/img/favicon.png" type="image/x-icon">
     <!-- Librería para Hashing SHA512 en el cliente -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
     <style>

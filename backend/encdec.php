@@ -74,10 +74,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['texto_encriptado'])) {
             }
 
         echo "Copia estos valores a tu archivo .env:<br><br>";
-        echo "DB_HOST=" . encriptarTexto("localhost", $key) . "<br>";
-        echo "DB_NAME=" . encriptarTexto("sintonia_artistica", $key) . "<br>";
-        echo "DB_USER=" . encriptarTexto("root", $key) . "<br>";
-        echo "DB_PASS=" . encriptarTexto("", $key) . "<br>";
+        echo "DB_HOST=" . encriptarTexto("www.warriol.com.uy:3306", $key) . "<br>";
+        echo "DB_NAME=" . encriptarTexto("warriols_sintonia_artistica", $key) . "<br>";
+        echo "DB_USER=" . encriptarTexto("warriols_sintonia", $key) . "<br>";
+        echo "DB_PASS=" . encriptarTexto(":9S,JC6Qic9W4m_", $key) . "<br>";
         echo "SECRET_KEY=" . encriptarTexto("arriola_music", $key) . "<br>";
         echo "<hr>";
 

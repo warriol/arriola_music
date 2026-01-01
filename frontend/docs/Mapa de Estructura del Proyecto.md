@@ -1,59 +1,44 @@
-# Mapa de Estructura: Proyecto Sintonía Artística
+Mapa de Estructura: Proyecto Sintonía Artística v2.3
 
-Este documento sirve para rastrear la ubicación y función de cada archivo en la transición a PHP.
+📂 Directorio Raíz
 
-### 📂 Directorio Raíz
+index.php -> Frontend público.
+.htaccess
 
-- index.php 
-    - Punto de entrada principal (orquestador).
+📂 /backend (API & Admin Logic)
 
-- .htaccess 
-    - (Opcional) Para URLs amigables.
+index.php -> Router (Entidad/Acción).
 
-### 📂 /backend (Lógica y Datos)
+.htaccess, .env, autoload.php.
 
-- config/config.php 
-    - Constantes globales (DB_HOST, DB_NAME, etc.).
+📂 class/
 
-- includes/db_connect.php 
-    - Conexión PDO segura a MySQL.
+Config.php -> Base de datos y Desencriptación.
 
-- includes/functions.php 
-    - Funciones reutilizables (limpiar strings, validar sesiones).
+Session.php -> Gestión de sesiones y seguridad de tokens.
 
-- auth/login_process.php 
-    - Validación de credenciales.
+📂 controllers/
 
-- api/get_secciones.php 
-    - Devuelve JSON con los datos para el dial.
+TourController.php
 
-- admin/ 
-    - Carpeta con los archivos del CRUD (index.php, tour.php, galeria.php).
+AuthController.php -> Login/Logout.
 
-### 📂 /frontend (Presentación)
+📂 models/
 
-- assets/css/main.css 
-    - Estilos extraídos del estilo original.
+Tour.php
 
-- assets/js/radio_logic.js 
-    - Lógica del dial, aguja y sonidos.
+Usuario.php -> Consulta de credenciales.
 
-- assets/js/gallery_slider.js 
-    - Control de la galería de fotos.
+📂 /frontend/admin (Interfaz de Gestión)
 
-- templates/header.php 
-    - El gabinete de madera y el dial (reutilizable).
+login.php -> Formulario de acceso.
 
-- templates/footer.php 
-    - La placa metálica y créditos.
+dashboard.php -> Menú principal del panel.
 
-- vistas/ 
-    - Partes dinámicas (seccion_inicio.php, seccion_tour.php, etc.).
+tour.php -> Gestión visual de fechas.
 
-### 📂 /media (Recursos)
+galeria.php -> Gestión visual de fotos.
 
-- /img/ 
-    - Fondos y fotos del artista.
+📂 /media
 
-- /music/ 
-    - Archivos MP3 de las canciones.
+📂 img/, music/, galeria/.

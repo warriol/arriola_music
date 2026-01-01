@@ -2,19 +2,26 @@
 Options -Indexes
 RewriteEngine On
 
+# Forzar el uso de HTTPS
+RewriteCond %{HTTPS} !=on
+RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
 # Redirigir todas las solicitudes a index.php (excepto archivos y directorios existentes)
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^(.*)$ index.php [QSA,L]
 
-# Forzar el uso de HTTPS
-RewriteCond %{HTTPS} !=on
-RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+RewriteRule ^backend/(class|controllers|models|core)/ - [F,L]
 
 # Ignorar las carpetas backend y frontend
-RewriteCond %{REQUEST_URI} ^/(backend|frontend)/
+RewriteRule ^(backend|frontend)/ - [L]
 
 # Regla específica para el frontend publico, solo si NO es un archivo real Y NO es un directorio real
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteCond %{REQUEST_URI} !^/$
+RewriteCond %{REQUEST_URI} !^/frontend/admin/
+RewriteRule ^.*$ / [L,R=302]
+
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^(.*)$ index.php [QSA,L]
