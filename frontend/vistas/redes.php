@@ -11,7 +11,7 @@ $urlYoutube   = $ajustes['youtube_url'] ?? '#';
 $urlFacebook  = $ajustes['facebook_url'] ?? '#';
 $urlSpotify   = $ajustes['spotify_url'] ?? '#';
 $urlLinktree  = $ajustes['linktree_url'] ?? '#';
-$youtubeId    = $ajustes['youtube_id'] ?? 'LNGkfFc0Fpk'; // ID por defecto
+$youtubeId    = $ajustes['youtube_id'] ?? '#';
 ?>
 <!-- SECCIÓN 06: REDES SOCIALES (ID: s6) -->
 <section id="s6">
