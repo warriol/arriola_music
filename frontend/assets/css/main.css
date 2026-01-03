@@ -427,7 +427,7 @@
 
         /* Contenedor tipo Panel para Spotify */
         .spotify-panel {
-            background: #1a0f08;
+            background: rgba(26, 15, 8, 0.7);
             padding: 20px;
             border: 8px solid #2d1b0e;
             border-radius: 12px;
@@ -441,7 +441,7 @@
             width: 90%;
             max-width: 1000px;
             height: 600px;
-            background: #1a0f08;
+            background: rgba(26, 15, 8, 0.7);
             border: 12px solid #2d1b0e;
             border-radius: 8px;
             box-shadow: 0 30px 60px rgba(0, 0, 0, 0.8), inset 0 0 40px rgba(0, 0, 0, 0.6);
