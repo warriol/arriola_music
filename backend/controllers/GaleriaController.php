@@ -1,7 +1,7 @@
 <?php
 /**
  * ARCHIVO: backend/controllers/GaleriaController.php
- * Descripción: Maneja la lógica de subida de archivos y registro en BD.
+ * Descripción: Maneja la subida (individual o masiva) de archivos y registro en BD.
  */
 
 class GaleriaController {
@@ -18,6 +18,11 @@ class GaleriaController {
         echo json_encode(["status" => "success", "data" => $datos]);
     }
 
+    /**
+     * Procesa la subida de una o varias imágenes.
+     * Si se escribe un pie de foto, se aplica a todas las imágenes del lote.
+     * Si no, se usa el nombre original de cada archivo.
+     */
     public function guardar() {
         header('Content-Type: application/json');
 
@@ -26,43 +31,69 @@ class GaleriaController {
             return;
         }
 
-        if (!isset($_FILES['imagen']) || $_FILES['imagen']['error'] !== UPLOAD_ERR_OK) {
-            echo json_encode(["status" => "error", "message" => "Error al recibir el archivo"]);
+        // Validamos que lleguen archivos bajo el nombre 'imagenes' (formato array)
+        if (!isset($_FILES['imagenes']) || empty($_FILES['imagenes']['name'][0])) {
+            echo json_encode(["status" => "error", "message" => "No se detectaron archivos para sintonizar."]);
             return;
         }
 
-        // 1. Lógica de Renombrado
-        $nombreOriginal = $_FILES['imagen']['name'];
-        $extension = strtolower(pathinfo($nombreOriginal, PATHINFO_EXTENSION));
+        $archivos = $_FILES['imagenes'];
+        $total = count($archivos['name']);
+        $exitos = 0;
+        $errores = [];
 
-        // Creamos un nombre corto y único: pol_ (de polaroid) + timestamp + random
-        $nuevoNombre = "pol_" . time() . "_" . bin2hex(random_bytes(2)) . "." . $extension;
-
-        // 2. Ruta de destino (carpeta media/galeria en la raíz)
         $dirDestino = __DIR__ . "/../../media/galeria/";
-
         if (!is_dir($dirDestino)) {
             mkdir($dirDestino, 0777, true);
         }
 
-        $rutaCompleta = $dirDestino . $nuevoNombre;
+        for ($i = 0; $i < $total; $i++) {
+            if ($archivos['error'][$i] !== UPLOAD_ERR_OK) continue;
 
-        // 3. Mover archivo
-        if (move_uploaded_file($_FILES['imagen']['tmp_name'], $rutaCompleta)) {
-            // 4. Guardar solo el nombre en la base de datos
-            $datos = [
-                'url_imagen' => $nuevoNombre,
-                'pie_de_foto' => $_POST['pie_de_foto'] ?? '',
-                'visible' => $_POST['visible'] ?? 1
-            ];
+            $nombreOriginal = $archivos['name'][$i];
+            $extension = strtolower(pathinfo($nombreOriginal, PATHINFO_EXTENSION));
 
-            if ($this->modelo->crear($datos)) {
-                echo json_encode(["status" => "success", "message" => "Imagen sintonizada correctamente"]);
+            // Generamos un nombre único para evitar colisiones en el servidor
+            $nuevoNombre = "pol_" . time() . "_" . $i . "_" . bin2hex(random_bytes(2)) . "." . $extension;
+            $rutaCompleta = $dirDestino . $nuevoNombre;
+
+            if (move_uploaded_file($archivos['tmp_name'][$i], $rutaCompleta)) {
+
+                // LÓGICA DE DESCRIPCIÓN:
+                // 1. Si el usuario escribió algo en el post, usamos eso.
+                // 2. Si no, usamos el nombre del archivo (limpiando la extensión).
+                $pieDeFoto = !empty($_POST['pie_de_foto'])
+                    ? $_POST['pie_de_foto']
+                    : pathinfo($nombreOriginal, PATHINFO_FILENAME);
+
+                $datos = [
+                    'url_imagen' => $nuevoNombre,
+                    'pie_de_foto' => $pieDeFoto,
+                    'visible' => $_POST['visible'] ?? 1
+                ];
+
+                if ($this->modelo->crear($datos)) {
+                    $exitos++;
+                } else {
+                    $errores[] = "Error en BD con: " . $nombreOriginal;
+                }
             } else {
-                echo json_encode(["status" => "error", "message" => "Error al registrar en la base de datos"]);
+                $errores[] = "Fallo al mover: " . $nombreOriginal;
             }
+        }
+
+        if ($exitos > 0) {
+            echo json_encode([
+                "status" => "success",
+                "message" => "Se han sintonizado $exitos imágenes correctamente.",
+                "errores" => $errores
+            ]);
         } else {
-            echo json_encode(["status" => "error", "message" => "No se pudo guardar el archivo físico"]);
+            echo json_encode([
+                "status" => "error",
+                "message" => "No se pudo subir ninguna imagen al dial.",
+                "detalles" => $errores
+            ]);
         }
     }
 
@@ -75,14 +106,12 @@ class GaleriaController {
         if (is_numeric($id)) {
             $nombreArchivo = $this->modelo->eliminar($id);
             if ($nombreArchivo) {
-                // Borrar archivo físico si existe
                 $ruta = __DIR__ . "/../../media/galeria/" . $nombreArchivo;
                 if (file_exists($ruta)) unlink($ruta);
-
                 echo json_encode(["status" => "success"]);
                 return;
             }
         }
-        echo json_encode(["status" => "error"]);
+        echo json_encode(["status" => "error", "message" => "No se pudo borrar la frecuencia visual."]);
     }
 }
