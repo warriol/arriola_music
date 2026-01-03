@@ -16,7 +16,6 @@ class UsuarioController {
 
         $datos = $this->modelo->listar();
 
-        // Es vital que no haya ningún "echo" o espacio en blanco antes de esto
         echo json_encode([
             "status" => "success",
             "data" => $datos
@@ -46,14 +45,12 @@ class UsuarioController {
         header('Content-Type: application/json');
 
         $user = $_POST['username'] ?? '';
-        $pass = $_POST['password'] ?? ''; // Nuevo hash SHA512 enviado desde el cliente
-
+        $pass = $_POST['password'] ?? '';
         if (empty($user) || empty($pass)) {
             echo json_encode(["status" => "error", "message" => "Datos incompletos para el reset"]);
             return;
         }
 
-        // Llamamos al modelo para actualizar la contraseña del usuario
         if ($this->modelo->actualizarPassword($user, $pass)) {
             echo json_encode(["status" => "success", "message" => "Contraseña restablecida correctamente"]);
         } else {

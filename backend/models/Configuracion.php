@@ -20,7 +20,6 @@ class Configuracion extends \class\Config {
             $stmt->execute();
             $resultados = $stmt->fetchAll();
 
-            // Lo transformamos en un array asociativo simple clave => valor
             $config = [];
             foreach ($resultados as $row) {
                 $config[$row['clave']] = $row['valor'];

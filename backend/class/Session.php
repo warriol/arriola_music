@@ -35,7 +35,6 @@ class Session
             return false;
         }
 
-        // Validamos que el token coincida con la firma esperada
         $expectedToken = hash_hmac('sha256', $_SESSION['user_id'] . $_SESSION['username'], $secretKey);
         return hash_equals($expectedToken, $_SESSION['auth_token']);
     }

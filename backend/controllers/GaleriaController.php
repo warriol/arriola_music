@@ -18,11 +18,6 @@ class GaleriaController {
         echo json_encode(["status" => "success", "data" => $datos]);
     }
 
-    /**
-     * Procesa la subida de una o varias imágenes.
-     * Si se escribe un pie de foto, se aplica a todas las imágenes del lote.
-     * Si no, se usa el nombre original de cada archivo.
-     */
     public function guardar() {
         header('Content-Type: application/json');
 
@@ -31,7 +26,6 @@ class GaleriaController {
             return;
         }
 
-        // Validamos que lleguen archivos bajo el nombre 'imagenes' (formato array)
         if (!isset($_FILES['imagenes']) || empty($_FILES['imagenes']['name'][0])) {
             echo json_encode(["status" => "error", "message" => "No se detectaron archivos para sintonizar."]);
             return;
@@ -53,15 +47,11 @@ class GaleriaController {
             $nombreOriginal = $archivos['name'][$i];
             $extension = strtolower(pathinfo($nombreOriginal, PATHINFO_EXTENSION));
 
-            // Generamos un nombre único para evitar colisiones en el servidor
             $nuevoNombre = "pol_" . time() . "_" . $i . "_" . bin2hex(random_bytes(2)) . "." . $extension;
             $rutaCompleta = $dirDestino . $nuevoNombre;
 
             if (move_uploaded_file($archivos['tmp_name'][$i], $rutaCompleta)) {
 
-                // LÓGICA DE DESCRIPCIÓN:
-                // 1. Si el usuario escribió algo en el post, usamos eso.
-                // 2. Si no, usamos el nombre del archivo (limpiando la extensión).
                 $pieDeFoto = !empty($_POST['pie_de_foto'])
                     ? $_POST['pie_de_foto']
                     : pathinfo($nombreOriginal, PATHINFO_FILENAME);

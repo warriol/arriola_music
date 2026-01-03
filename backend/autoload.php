@@ -5,14 +5,12 @@
  */
 
 spl_autoload_register(function ($class) {
-    // Definimos las carpetas donde buscar clases
     $directories = [
         'class',
         'controllers',
         'models'
     ];
 
-    // Limpiamos el nombre de la clase (quitamos namespaces si los hubiera)
     $parts = explode('\\', $class);
     $className = end($parts);
 

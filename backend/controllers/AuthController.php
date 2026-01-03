@@ -21,17 +21,15 @@ class AuthController {
         }
 
         $user = $_POST['username'] ?? '';
-        $passHash = $_POST['password'] ?? ''; // Recibimos el hash sha512 desde el cliente
+        $passHash = $_POST['password'] ?? '';
 
         $usuarioData = $this->modelo->buscarPorUsername($user);
 
-        // Comparamos el hash enviado con el de la base de datos
         if ($usuarioData && $passHash === $usuarioData['password']) {
 
             \class\Session::set('user_id', $usuarioData['id']);
             \class\Session::set('username', $usuarioData['username']);
 
-            // Generamos token de sesión usando la secretKey de Config
             $token = hash_hmac('sha256', $usuarioData['id'] . $usuarioData['username'], $this->modelo->getSecretKey());
             \class\Session::set('auth_token', $token);
 

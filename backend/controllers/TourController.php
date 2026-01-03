@@ -17,7 +17,6 @@ class TourController {
     }
 
     public function listar() {
-        // Detectamos si es modo admin para ver ocultos
         $soloVisibles = !(isset($_GET['admin']) && $_GET['admin'] === 'true');
 
         $resultado = $this->modelo->listar($soloVisibles);
@@ -56,8 +55,6 @@ class TourController {
 
     public function guardar() {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            // Aquí se debería validar el token con la SECRET_KEY de la clase Config
-            // por ahora procedemos con el guardado
             $resultado = $this->modelo->crear($_POST);
 
             header('Content-Type: application/json');
@@ -66,8 +63,6 @@ class TourController {
     }
 
     public function borrar() {
-        // En tu index.php, podrías pasar el ID como parte de la URI
-        // Aquí lo capturamos (dependiendo de cómo ajustes el router)
         $uri = $_SERVER['REQUEST_URI'];
         $parts = explode('/', trim($uri, '/'));
         $id = end($parts);
