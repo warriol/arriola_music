@@ -17,17 +17,12 @@ try {
 <html lang="es">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Presencia digital de Jose Luis Arriola, músico y compositor argentino. Su discografía, tour, redes y más.">
-    <meta name="keywords" content="Jose Luis Arriola, músico, compositor, argentino, discografía, tour, redes">
-    <meta name="author" content="Wilson Denis Arriola">
+    <?php
+    include_once 'frontend/templates/meta.php';
+    ?>
     <title><?php echo $ajustes['nombre_sitio'] ?? 'Jose Luis Arriola - Sintonía Artística'; ?></title>
-    <!-- favicon -->
     <link rel="icon" href="media/img/favicon.png" type="image/x-icon">
-    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Estilos Personalizados Extraídos -->
     <link rel="stylesheet" href="frontend/assets/css/main.css">
 </head>
 

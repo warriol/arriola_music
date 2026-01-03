@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
+    <?php
+    include_once '../templates/meta.php';
+    ?>
     <title>Login - Panel Admin</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="icon" href="../../media/img/favicon.png" type="image/x-icon">
