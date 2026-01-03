@@ -62,9 +62,22 @@ $username = \class\Session::get('username');
         <a href="dashboard.php" class="nav-link block px-6 py-4 flex items-center gap-3"><span>📻</span> INICIO</a>
         <a href="tour.php" class="nav-link active block px-6 py-4 flex items-center gap-3"><span>🗓️</span> GESTIÓN TOUR</a>
         <a href="galeria.php" class="nav-link block px-6 py-4 flex items-center gap-3"><span>📸</span> GALERÍA</a>
+        <a href="configuracion.php" class="nav-link block px-6 py-4 flex items-center gap-3"><span>⚙️</span> AJUSTES</a>
+        <a href="usuarios.php" class="nav-link block px-6 py-4 flex items-center gap-3"><span>👥</span> USUARIOS</a>
     </nav>
     <div class="p-6 border-t border-[#4e342e]">
-        <a href="../../backend/auth/logout" class="block w-full bg-red-900/30 text-red-500 text-center py-2 rounded text-xs font-bold">LOGOUT</a>
+        <div class="flex items-center gap-3 mb-4">
+            <div class="w-8 h-8 rounded-full bg-amber-700 flex items-center justify-center font-bold text-black text-xs">
+                <?php echo strtoupper(substr($username, 0, 2)); ?>
+            </div>
+            <div class="text-xs">
+                <p class="font-bold text-amber-200"><?php echo $username; ?></p>
+                <p class="text-zinc-500">Administrador</p>
+            </div>
+        </div>
+        <a href="../../backend/auth/logout" class="block w-full bg-red-900/30 hover:bg-red-900/50 text-red-500 text-center py-2 rounded text-xs font-bold transition-colors">
+            APAGAR (LOGOUT)
+        </a>
     </div>
 </aside>
 

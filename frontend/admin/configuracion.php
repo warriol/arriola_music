@@ -51,9 +51,21 @@ $username = \class\Session::get('username');
         <a href="tour.php" class="nav-link block px-6 py-4 flex items-center gap-3"><span>🗓️</span> GESTIÓN TOUR</a>
         <a href="galeria.php" class="nav-link block px-6 py-4 flex items-center gap-3"><span>📸</span> GALERÍA</a>
         <a href="configuracion.php" class="nav-link active block px-6 py-4 flex items-center gap-3"><span>⚙️</span> AJUSTES</a>
+        <a href="usuarios.php" class="nav-link block px-6 py-4 flex items-center gap-3"><span>👥</span> USUARIOS</a>
     </nav>
     <div class="p-6 border-t border-[#4e342e]">
-        <a href="../../backend/auth/logout" class="block w-full bg-red-900/30 text-red-500 text-center py-2 rounded text-xs font-bold">LOGOUT</a>
+        <div class="flex items-center gap-3 mb-4">
+            <div class="w-8 h-8 rounded-full bg-amber-700 flex items-center justify-center font-bold text-black text-xs">
+                <?php echo strtoupper(substr($username, 0, 2)); ?>
+            </div>
+            <div class="text-xs">
+                <p class="font-bold text-amber-200"><?php echo $username; ?></p>
+                <p class="text-zinc-500">Administrador</p>
+            </div>
+        </div>
+        <a href="../../backend/auth/logout" class="block w-full bg-red-900/30 hover:bg-red-900/50 text-red-500 text-center py-2 rounded text-xs font-bold transition-colors">
+            APAGAR (LOGOUT)
+        </a>
     </div>
 </aside>
 
@@ -62,57 +74,58 @@ $username = \class\Session::get('username');
         <h1 class="text-4xl font-bold text-amber-500 uppercase">Ajustes del Sistema</h1>
         <p class="text-zinc-400 text-sm">Modula los parámetros generales de la transmisión.</p>
     </header>
-
-    <form id="configForm" class="max-w-4xl space-y-8">
-        <!-- SECCIÓN GENERAL -->
-        <div class="admin-card p-6 rounded-lg">
-            <h3 class="text-amber-500 font-bold mb-6 border-b border-[#4e342e] pb-2 uppercase text-sm tracking-widest">Información General</h3>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div>
-                    <label>Nombre del Sitio / Artista</label>
-                    <input type="text" name="nombre_sitio" id="nombre_sitio" placeholder="Jose Luis Arriola">
-                </div>
-                <div>
-                    <label>ID de Video Principal (YouTube)</label>
-                    <input type="text" name="youtube_id" id="youtube_id" placeholder="ID de 11 caracteres">
-                    <span class="text-[9px] text-zinc-600 mt-1 block">Ej: LNGkfFc0Fpk</span>
-                </div>
-            </div>
-        </div>
-
-        <!-- SECCIÓN REDES SOCIALES -->
-        <div class="admin-card p-6 rounded-lg">
-            <h3 class="text-amber-500 font-bold mb-6 border-b border-[#4e342e] pb-2 uppercase text-sm tracking-widest">Redes Sociales (Enlaces)</h3>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div>
-                    <label>Instagram URL</label>
-                    <input type="url" name="instagram_url" id="instagram_url">
-                </div>
-                <div>
-                    <label>YouTube Channel URL</label>
-                    <input type="url" name="youtube_url" id="youtube_url">
-                </div>
-                <div>
-                    <label>Facebook URL</label>
-                    <input type="url" name="facebook_url" id="facebook_url">
-                </div>
-                <div>
-                    <label>Spotify Artist URL</label>
-                    <input type="url" name="spotify_url" id="spotify_url">
+    <div class="flex items-center justify-center p-12">
+        <form id="configForm" class="w-full space-y-8">
+            <!-- SECCIÓN GENERAL -->
+            <div class="admin-card p-12 rounded-lg">
+                <h3 class="text-amber-500 font-bold mb-6 border-b border-[#4e342e] pb-2 uppercase text-sm tracking-widest">Información General</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <label>Nombre del Sitio / Artista</label>
+                        <input type="text" name="nombre_sitio" id="nombre_sitio" placeholder="Jose Luis Arriola">
+                    </div>
+                    <div>
+                        <label>ID de Video Principal (YouTube)</label>
+                        <input type="text" name="youtube_id" id="youtube_id" placeholder="ID de 11 caracteres">
+                        <span class="text-[9px] text-zinc-600 mt-1 block">Ej: LNGkfFc0Fpk</span>
+                    </div>
                 </div>
             </div>
-            <div class="mt-6">
-                <label>Linktree / Bio Link URL</label>
-                <input type="url" name="linktree_url" id="linktree_url">
-            </div>
-        </div>
 
-        <div class="flex justify-end pt-4">
-            <button type="submit" id="btnSave" class="bg-amber-600 hover:bg-amber-500 text-black font-bold py-4 px-10 rounded uppercase tracking-widest text-xs transition-all shadow-lg">
-                Guardar Cambios
-            </button>
-        </div>
-    </form>
+            <!-- SECCIÓN REDES SOCIALES -->
+            <div class="admin-card p-12 rounded-lg">
+                <h3 class="text-amber-500 font-bold mb-6 border-b border-[#4e342e] pb-2 uppercase text-sm tracking-widest">Redes Sociales (Enlaces)</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <label>Instagram URL</label>
+                        <input type="url" name="instagram_url" id="instagram_url">
+                    </div>
+                    <div>
+                        <label>YouTube Channel URL</label>
+                        <input type="url" name="youtube_url" id="youtube_url">
+                    </div>
+                    <div>
+                        <label>Facebook URL</label>
+                        <input type="url" name="facebook_url" id="facebook_url">
+                    </div>
+                    <div>
+                        <label>Spotify Artist URL</label>
+                        <input type="url" name="spotify_url" id="spotify_url">
+                    </div>
+                </div>
+                <div class="mt-6">
+                    <label>Linktree / Bio Link URL</label>
+                    <input type="url" name="linktree_url" id="linktree_url">
+                </div>
+            </div>
+
+            <div class="flex justify-end pt-4">
+                <button type="submit" id="btnSave" class="bg-amber-600 hover:bg-amber-500 text-black font-bold py-4 px-10 rounded uppercase tracking-widest text-xs transition-all shadow-lg">
+                    Guardar Cambios
+                </button>
+            </div>
+        </form>
+    </div>
 </main>
 
 <script>

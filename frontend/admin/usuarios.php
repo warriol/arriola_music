@@ -17,7 +17,7 @@ if (!\class\Session::check($sKey)) {
     exit();
 }
 
-$usernameActual = \class\Session::get('username');
+$username = \class\Session::get('username');
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -53,7 +53,18 @@ $usernameActual = \class\Session::get('username');
         <a href="usuarios.php" class="nav-link active block px-6 py-4 flex items-center gap-3"><span>👥</span> USUARIOS</a>
     </nav>
     <div class="p-6 border-t border-[#4e342e]">
-        <a href="../../backend/auth/logout" class="block w-full bg-red-900/30 text-red-500 text-center py-2 rounded text-xs font-bold">LOGOUT</a>
+        <div class="flex items-center gap-3 mb-4">
+            <div class="w-8 h-8 rounded-full bg-amber-700 flex items-center justify-center font-bold text-black text-xs">
+                <?php echo strtoupper(substr($username, 0, 2)); ?>
+            </div>
+            <div class="text-xs">
+                <p class="font-bold text-amber-200"><?php echo $username; ?></p>
+                <p class="text-zinc-500">Administrador</p>
+            </div>
+        </div>
+        <a href="../../backend/auth/logout" class="block w-full bg-red-900/30 hover:bg-red-900/50 text-red-500 text-center py-2 rounded text-xs font-bold transition-colors">
+            APAGAR (LOGOUT)
+        </a>
     </div>
 </aside>
 
@@ -118,13 +129,13 @@ $usernameActual = \class\Session::get('username');
     function renderUsers(data) {
         userList.innerHTML = data.map(user => `
                 <tr class="border-t border-[#4e342e] hover:bg-white/5 transition-colors">
-                    <td class="p-4 font-bold text-amber-200">${user.username} ${user.username === '<?php echo $usernameActual; ?>' ? '<span class="text-[8px] bg-amber-900 text-amber-300 px-1 rounded ml-2 uppercase">Mando Actual</span>' : ''}</td>
+                    <td class="p-4 font-bold text-amber-200">${user.username} ${user.username === '<?php echo $username; ?>' ? '<span class="text-[8px] bg-amber-900 text-amber-300 px-1 rounded ml-2 uppercase">Mando Actual</span>' : ''}</td>
                     <td class="p-4 text-zinc-400">${user.email || '---'}</td>
                     <td class="p-4 flex justify-end gap-5">
                         <button onclick="resetPassword('${user.username}')" title="Resetear Contraseña" class="text-amber-500 hover:text-amber-400 transition-colors">
                             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.777-7.777zm0 0L15.5 7.5m0 0l3 3m-3-3l-2.5-2.5"/></svg>
                         </button>
-                        ${user.username !== 'admin' && user.username !== '<?php echo $usernameActual; ?>' ? `
+                        ${user.username !== 'admin' && user.username !== '<?php echo $username; ?>' ? `
                             <button onclick="deleteUser('${user.username}')" title="Eliminar" class="text-red-500 hover:text-red-400 transition-colors">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18m-2 0v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6m3 0V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/></svg>
                             </button>

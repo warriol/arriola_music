@@ -20,39 +20,39 @@
                     Fabián Pintos (tambor piano)
                     Néstor Mahmud (batería)
                 -->
-                <div class="photo-card" style="--rotation: 3deg"><img src="media/galeria/joselo.jpg">
+                <div class="photo-card" style="--rotation: 3deg"><img src="media/img/joselo.jpg">
                     <p class="text-center mt-2 text-zinc-800 font-bold">Jose Luis Arriola</p>
                     <p class="text-center mt-2 text-zinc-800 font-bold">Voz y Guitarra</p>
                 </div>
-                <div class="photo-card" style="--rotation: -1deg"><img src="media/galeria/veronica.jpg">
+                <div class="photo-card" style="--rotation: -1deg"><img src="media/img/veronica.jpg">
                     <p class="text-center mt-2 text-zinc-800 font-bold">Verónica Gruñeiro</p>
                     <p class="text-center mt-2 text-zinc-800 font-bold">Voz</p>
                 </div>
-                <div class="photo-card" style="--rotation: -2deg"><img src="media/galeria/mario.jpg">
+                <div class="photo-card" style="--rotation: -2deg"><img src="media/img/mario.jpg">
                     <p class="text-center mt-2 text-zinc-800 font-bold">Mario Muzi</p>
                     <p class="text-center mt-2 text-zinc-800 font-bold">Guitarra</p>
                 </div>
-                <div class="photo-card" style="--rotation: 2deg"><img src="media/galeria/pichono.jpg">
+                <div class="photo-card" style="--rotation: 2deg"><img src="media/img/pichono.jpg">
                     <p class="text-center mt-2 text-zinc-800 font-bold">Pichono Villanueva</p>
                     <p class="text-center mt-2 text-zinc-800 font-bold">Guitarra y Cuatro</p>
                 </div>
-                <div class="photo-card" style="--rotation: -2deg"><img src="media/galeria/federico.jpg">
+                <div class="photo-card" style="--rotation: -2deg"><img src="media/img/federico.jpg">
                     <p class="text-center mt-2 text-zinc-800 font-bold">Federico Suárez</p>
                     <p class="text-center mt-2 text-zinc-800 font-bold">Bajo</p>
                 </div>
-                <div class="photo-card" style="--rotation: 3deg"><img src="media/galeria/franco.jpg">
+                <div class="photo-card" style="--rotation: 3deg"><img src="media/img/franco.jpg">
                     <p class="text-center mt-2 text-zinc-800 font-bold">Franco Acosta</p>
                     <p class="text-center mt-2 text-zinc-800 font-bold">Tambor Repique</p>
                 </div>
-                <div class="photo-card" style="--rotation: -2deg"><img src="media/galeria/florencia.jpg">
+                <div class="photo-card" style="--rotation: -2deg"><img src="media/img/florencia.jpg">
                     <p class="text-center mt-2 text-zinc-800 font-bold">Florencia Capano</p>
                     <p class="text-center mt-2 text-zinc-800 font-bold">Tambor Chico y cajón peruano</p>
                 </div>
-                <div class="photo-card" style="--rotation: 3deg"><img src="media/galeria/fabian.jpg">
+                <div class="photo-card" style="--rotation: 3deg"><img src="media/img/fabian.jpg">
                     <p class="text-center mt-2 text-zinc-800 font-bold">Fabián Pintos</p>
                     <p class="text-center mt-2 text-zinc-800 font-bold">Tambor Piano</p>
                 </div>
-                <div class="photo-card" style="--rotation: -2deg"><img src="media/galeria/nestor.jpg">
+                <div class="photo-card" style="--rotation: -2deg"><img src="media/img/nestor.jpg">
                     <p class="text-center mt-2 text-zinc-800 font-bold">Néstor Mahmud</p>
                     <p class="text-center mt-2 text-zinc-800 font-bold">Batería</p>
                 </div>
