@@ -6,7 +6,6 @@
 
 require_once '../../backend/autoload.php';
 
-// Verificación de Sesión
 $config = new class extends \class\Config {
     public function getKey() { return $this->secretKey; }
 };
@@ -35,14 +34,12 @@ $username = \class\Session::get('username');
         .nav-link { transition: all 0.3s ease; border-left: 4px solid transparent; }
         .nav-link:hover, .nav-link.active { background: #4e342e; border-left-color: #ff1a1a; color: #ffb347; }
 
-        /* Estilo de Tabla */
         .tour-table { width: 100%; border-collapse: separate; border-spacing: 0 8px; }
         .tour-table tr { background: #1a0f08; transition: transform 0.2s; }
         .tour-table tr:hover { transform: scale(1.01); background: #26170d; }
         .tour-table td, .tour-table th { padding: 16px; border-top: 1px solid #4e342e; border-bottom: 1px solid #4e342e; }
         .tour-table th { background: #000; color: #ffb347; text-transform: uppercase; font-size: 0.7rem; letter-spacing: 2px; text-align: left; }
 
-        /* Modal */
         .modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.85); z-index: 100; align-items: center; justify-content: center; backdrop-filter: blur(5px); }
         .modal.active { display: flex; }
         .modal-content { background: #1a0f08; border: 4px solid #4e342e; width: 90%; max-width: 600px; padding: 2rem; position: relative; }
@@ -81,7 +78,6 @@ $username = \class\Session::get('username');
     </div>
 </aside>
 
-<!-- MAIN CONTENT -->
 <main class="flex-1 overflow-y-auto p-8 bg-[#0a0a0a]">
     <header class="flex justify-between items-center mb-10">
         <div>
@@ -93,7 +89,6 @@ $username = \class\Session::get('username');
         </button>
     </header>
 
-    <!-- LISTADO DE FECHAS -->
     <div class="overflow-x-auto">
         <table class="tour-table" id="tourTable">
             <thead>
@@ -105,14 +100,12 @@ $username = \class\Session::get('username');
             </tr>
             </thead>
             <tbody id="tourList">
-            <!-- Cargado vía JS -->
             <tr><td colspan="4" class="text-center py-10 text-zinc-600 italic">Sintonizando señal...</td></tr>
             </tbody>
         </table>
     </div>
 </main>
 
-<!-- MODAL DE EDICIÓN / CREACIÓN -->
 <div id="tourModal" class="modal">
     <div class="modal-content">
         <h3 id="modalTitle" class="text-xl font-bold text-amber-500 mb-6 uppercase">Nueva Fecha de Tour</h3>
@@ -169,7 +162,6 @@ $username = \class\Session::get('username');
 
     async function loadTours() {
         try {
-            // Llamamos al controlador con modo admin para ver todo
             const response = await fetch('../../backend/tour/listar?admin=true');
             const result = await response.json();
 
@@ -236,13 +228,11 @@ $username = \class\Session::get('username');
         openModal(item);
     }
 
-    // Guardar o Actualizar
     tourForm.onsubmit = async (e) => {
         e.preventDefault();
         const formData = new FormData(tourForm);
         const id = document.getElementById('tourId').value;
 
-        // Ruta dinámica según si editamos o creamos
         const url = id ? `../../backend/tour/actualizar/${id}` : '../../backend/tour/guardar';
 
         try {
@@ -260,9 +250,7 @@ $username = \class\Session::get('username');
         }
     };
 
-    // Borrar Fecha
     async function deleteTour(id) {
-        // Nota: En un entorno real, usa un modal personalizado en vez de confirm()
         if (!confirm('¿Seguro que quieres apagar esta frecuencia permanentemente?')) return;
 
         try {
@@ -274,7 +262,6 @@ $username = \class\Session::get('username');
         }
     }
 
-    // Inicio
     loadTours();
 </script>
 </body>

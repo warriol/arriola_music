@@ -4,19 +4,12 @@
  * Función: Punto de entrada principal. Orquesta la carga de plantillas y vistas.
  */
 
-// Cargamos el motor del backend (Autoload y Configuración)
-// Usamos la ruta hacia el archivo de autoload que definimos
 require_once 'backend/autoload.php';
 
-/**
- * Inicializamos la configuración global.
- * Esto nos permitirá usar los ajustes (como el nombre del sitio) en los templates.
- */
 try {
     $configModel = new Configuracion();
     $ajustes = $configModel->obtenerTodos();
 } catch (Exception $e) {
-    // En caso de error de conexión, podrías mostrar un mensaje sutil
     $ajustes = [];
 }
 ?>
@@ -41,16 +34,11 @@ try {
 <body>
 
     <?php
-    // Cargamos el gabinete de la radio (Header y Dial)
     include_once 'frontend/templates/header.php';
     ?>
 
     <main>
         <?php
-        /**
-         * En esta etapa estática cargamos los archivos de vista directamente.
-         * Más adelante, PHP decidirá qué cargar basándose en la BD.
-         */
         include_once 'frontend/vistas/inicio.php';
         include_once 'frontend/vistas/galeria.php';
         include_once 'frontend/vistas/tour.php';
@@ -61,7 +49,6 @@ try {
     </main>
 
     <?php
-    // Cargamos la base de madera y scripts
     include_once 'frontend/templates/footer.php';
     ?>
 

@@ -6,7 +6,6 @@
 
 require_once '../../backend/autoload.php';
 
-// Verificación de Sesión
 $configClass = new class extends \class\Config {
     public function getKey() { return $this->secretKey; }
 };
@@ -132,7 +131,6 @@ $username = \class\Session::get('username');
     const form = document.getElementById('configForm');
     const btn = document.getElementById('btnSave');
 
-    // Cargar datos actuales
     async function loadConfig() {
         try {
             const response = await fetch('../../backend/configuracion/listar');
@@ -140,7 +138,6 @@ $username = \class\Session::get('username');
 
             if (result.status === 'success') {
                 const data = result.data;
-                // Llenamos el formulario dinámicamente si los IDs coinciden con las claves
                 for (const clave in data) {
                     const input = document.getElementById(clave);
                     if (input) input.value = data[clave];

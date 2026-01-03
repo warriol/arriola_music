@@ -9,17 +9,6 @@
         <button id="prevGallery" class="nav-btn bg-zinc-700 p-2 rounded-full">◀</button>
         <div class="gallery-viewport">
             <div id="galleryContainer" class="gallery-container">
-                <!--
-                    Jose Luis Arriola (voz, guitarra)
-                    Verónica Gruñeiro (voz)
-                    Mario Muzi (guitarra)
-                    Pichono Villanueva (guitarra, cuatro)
-                    Federico Suárez (bajo)
-                    Franco Acosta (tambor repique)
-                    Florencia Capano (tambor chico, cajón peruano)
-                    Fabián Pintos (tambor piano)
-                    Néstor Mahmud (batería)
-                -->
                 <div class="photo-card" style="--rotation: 3deg"><img src="media/img/joselo.jpg">
                     <p class="text-center mt-2 text-zinc-800 font-bold">Jose Luis Arriola</p>
                     <p class="text-center mt-2 text-zinc-800 font-bold">Voz y Guitarra</p>

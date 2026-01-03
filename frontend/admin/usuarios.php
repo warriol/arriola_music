@@ -6,7 +6,6 @@
 
 require_once '../../backend/autoload.php';
 
-// Verificación de Sesión
 $config = new class extends \class\Config {
     public function getKey() { return $this->secretKey; }
 };
@@ -89,13 +88,11 @@ $username = \class\Session::get('username');
             </tr>
             </thead>
             <tbody id="userList">
-            <!-- Dinámico -->
             </tbody>
         </table>
     </div>
 </main>
 
-<!-- MODAL REGISTRO -->
 <div id="userModal" class="modal">
     <div class="modal-content bg-[#1a0f08] border-4 border-[#4e342e] p-8 w-full max-w-md">
         <h3 class="text-xl font-bold text-amber-500 mb-6 uppercase">Nuevo Operador</h3>

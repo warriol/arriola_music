@@ -4,15 +4,10 @@
  * Descripción: Muestra las fechas de conciertos sintonizadas desde la base de datos.
  */
 
-// Instanciamos el modelo de Tour
 $tourModel = new Tour();
 
-// Obtenemos solo los eventos marcados como visibles
 $eventos = $tourModel->listar(true);
 
-/**
- * Función auxiliar para formatear fechas de MySQL a formato vintage (DD MES YYYY)
- */
 function formatearFechaVintage($fecha) {
     $meses = ["ENE", "FEB", "MAR", "ABR", "MAY", "JUN", "JUL", "AGO", "SEP", "OCT", "NOV", "DIC"];
     $time = strtotime($fecha);

@@ -6,7 +6,6 @@
 
 require_once '../../backend/autoload.php';
 
-// 1. Verificación de Sesión
 $configClass = new class extends \class\Config {
     public function getKey() { return $this->secretKey; }
 };
@@ -19,14 +18,12 @@ if (!\class\Session::check($sKey)) {
 
 $username = \class\Session::get('username');
 
-// 2. Lógica para los contadores dinámicos
-// Instanciamos los modelos para obtener las estadísticas
 $tourModel = new Tour();
-$eventos = $tourModel->listar(false); // Pasamos false para contar todos, incluso los no visibles
+$eventos = $tourModel->listar(false);
 $totalEventos = is_array($eventos) ? count($eventos) : 0;
 
 $galeriaModel = new Galeria();
-$fotos = $galeriaModel->listar(false); // Pasamos false para contar todo el archivo
+$fotos = $galeriaModel->listar(false);
 $totalFotos = is_array($fotos) ? count($fotos) : 0;
 ?>
 <!DOCTYPE html>
@@ -84,7 +81,6 @@ $totalFotos = is_array($fotos) ? count($fotos) : 0;
 
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6 relative z-10">
 
-        <!-- CARD TOUR -->
         <div class="admin-card p-6 rounded-lg shadow-xl">
             <div class="flex justify-between items-start mb-4">
                 <h3 class="font-bold text-amber-200 uppercase tracking-widest text-sm">Próximos Toques</h3>
@@ -98,7 +94,6 @@ $totalFotos = is_array($fotos) ? count($fotos) : 0;
             </a>
         </div>
 
-        <!-- CARD GALERÍA -->
         <div class="admin-card p-6 rounded-lg shadow-xl">
             <div class="flex justify-between items-start mb-4">
                 <h3 class="font-bold text-amber-200 uppercase tracking-widest text-sm">Fotos en Archivo</h3>
@@ -112,7 +107,6 @@ $totalFotos = is_array($fotos) ? count($fotos) : 0;
             </a>
         </div>
 
-        <!-- CARD ESTADO -->
         <div class="admin-card p-6 rounded-lg shadow-xl border-l-4 border-green-600">
             <div class="flex justify-between items-start mb-4">
                 <h3 class="font-bold text-amber-200 uppercase tracking-widest text-sm">Estado del Sitio</h3>

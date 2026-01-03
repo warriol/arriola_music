@@ -4,10 +4,8 @@
  * Descripción: Galería dinámica de conciertos y folletos con visualización ampliada.
  */
 
-// Instanciamos el modelo de Galería
 $galeriaModel = new Galeria();
 
-// Obtenemos las fotos de conciertos/folletos marcadas como visibles
 $fotosMultimedia = $galeriaModel->listar(true);
 ?>
 <!-- SECCIÓN 05: MULTIMEDIA -->
@@ -17,10 +15,7 @@ $fotosMultimedia = $galeriaModel->listar(true);
         ARCHIVO MULTIMEDIA
     </h2>
 
-
-    <!-- Frame del Monitor -->
     <div class="multimedia-monitor-frame mt-20">
-        <!-- Contenedor con scroll vertical -->
         <div class="p-6 h-full overflow-y-auto custom-scrollbar bg-black/20">
             <?php if (empty($fotosMultimedia)): ?>
                 <div class="flex items-center justify-center h-full">
@@ -50,7 +45,6 @@ $fotosMultimedia = $galeriaModel->listar(true);
         </div>
     </div>
 
-    <!-- MODAL LIGHTBOX (Oculto por defecto) -->
     <div id="multimediaLightbox" class="fixed inset-0 z-[1000] hidden bg-black/95 flex-col items-center justify-center p-4 backdrop-blur-sm" onclick="closeLightbox()">
         <button class="absolute top-10 right-10 text-amber-500 text-4xl font-bold hover:text-white transition-colors">&times;</button>
 
@@ -62,13 +56,11 @@ $fotosMultimedia = $galeriaModel->listar(true);
 </section>
 
 <style>
-    /* Estilo específico para el monitor multimedia */
     .custom-scrollbar::-webkit-scrollbar { width: 8px; }
     .custom-scrollbar::-webkit-scrollbar-track { background: #000; }
     .custom-scrollbar::-webkit-scrollbar-thumb { background: #4e342e; border-radius: 0px; border: 1px solid #1a0f08; }
     .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: #ffb347; }
 
-    /* Animación de entrada para el modal */
     #multimediaLightbox.active { display: flex; animation: fadeIn 0.3s ease-out; }
 
     @keyframes fadeIn {
@@ -78,9 +70,6 @@ $fotosMultimedia = $galeriaModel->listar(true);
 </style>
 
 <script>
-    /**
-     * Lógica de la Galería Multimedia
-     */
     function openLightbox(url, caption) {
         const lightbox = document.getElementById('multimediaLightbox');
         const img = document.getElementById('lightboxImg');
@@ -90,7 +79,6 @@ $fotosMultimedia = $galeriaModel->listar(true);
         cap.innerText = caption;
         lightbox.classList.add('active');
 
-        // Bloquear scroll del body al abrir
         document.body.style.overflow = 'hidden';
     }
 
@@ -98,11 +86,9 @@ $fotosMultimedia = $galeriaModel->listar(true);
         const lightbox = document.getElementById('multimediaLightbox');
         lightbox.classList.remove('active');
 
-        // Restaurar scroll
         document.body.style.overflow = 'auto';
     }
 
-    // Cerrar con la tecla Escape
     document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape') closeLightbox();
     });

@@ -4,8 +4,6 @@
  * Descripción: Placa metálica con los diales de conexión a redes sociales.
  */
 
-// Los ajustes ya vienen cargados desde index.php en la variable $ajustes
-// Definimos variables seguras con fallbacks
 $urlInstagram = $ajustes['instagram_url'] ?? '#';
 $urlYoutube   = $ajustes['youtube_url'] ?? '#';
 $urlFacebook  = $ajustes['facebook_url'] ?? '#';
@@ -19,7 +17,6 @@ $youtubeId    = $ajustes['youtube_id'] ?? '#';
         class="text-3xl font-black mb-10 text-amber-600 tracking-widest bg-black/40 px-6 py-2 border-b-2 border-amber-900">
         REDES SOCIALES</h2>
 
-    <!-- Video YouTube sobre fondo parallax -->
     <div class="footer-video-frame">
         <iframe width="560" height="315" src="https://www.youtube.com/embed/<?php echo $youtubeId; ?>"
             title="YouTube video player" frameborder="0"
@@ -27,7 +24,6 @@ $youtubeId    = $ajustes['youtube_id'] ?? '#';
             referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
     </div>
 
-    <!-- Base de Madera Inferior (Placa + Créditos) -->
     <div class="bottom-wood-base">
         <div class="metal-plate">
             <div class="screw screw-tl"></div>
@@ -67,7 +63,7 @@ $youtubeId    = $ajustes['youtube_id'] ?? '#';
             <a href="<?php echo $urlLinktree; ?>" target="_blank" class="linktree-btn">VISITAR LINKTREE
                 OFICIAL</a>
         </div>
-        <!-- Créditos grabados -->
+
         <div class="engraved-text">
             Copyright &copy; desde 2025 - <a href="https://warriol.com.uy" target="_blank">Wilson Denis
                 Arriola</a>

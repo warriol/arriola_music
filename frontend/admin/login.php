@@ -5,7 +5,6 @@
     <title>Login - Panel Admin</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="icon" href="../../media/img/favicon.png" type="image/x-icon">
-    <!-- Librería para Hashing SHA512 en el cliente -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&display=swap');
@@ -38,16 +37,13 @@
         const username = document.getElementById('username').value;
         const passwordRaw = document.getElementById('password_raw').value;
 
-        // 1. Hasheamos la contraseña en el cliente
         const passwordHash = CryptoJS.SHA512(passwordRaw).toString();
 
-        // 2. Preparamos el FormData
         const formData = new FormData();
         formData.append('username', username);
         formData.append('password', passwordHash);
 
         try {
-            // Ajusta la URL según tu estructura: /backend/auth/login
             const response = await fetch('../../backend/auth/login', {
                 method: 'POST',
                 body: formData
