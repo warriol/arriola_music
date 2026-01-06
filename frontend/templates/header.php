@@ -27,8 +27,11 @@
     </div>
 
     <div class="knob-unit hidden min-[771px]:flex flex-col items-center gap-1">
-        <div id="tuningKnob" class="knob">
-            <div class="knob-dot"></div>
+        <div class="knob-container">
+            <div class="knob-shadow"></div>
+            <div id="tuningKnob" class="knob">
+                <div class="knob-indicator"></div>
+            </div>
         </div>
         <p class="text-[10px] uppercase font-bold text-[#8d6e63]">Sintonía</p>
     </div>
