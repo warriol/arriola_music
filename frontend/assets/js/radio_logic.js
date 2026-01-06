@@ -63,12 +63,12 @@ document.addEventListener('DOMContentLoaded', () => {
         powerBtn.classList.toggle('is-pushed');
 
         if (isPowerOn) {
-            powerLed.style.backgroundColor = "#ff0000";
+            powerLed.style.backgroundColor = "#22c55e";
             powerLed.style.boxShadow = "0 0 10px #ff0000";
             iniciarAudioSistema();
             if (currentSectionIndex !== -1) sintonizarCancion(currentSectionIndex);
         } else {
-            powerLed.style.backgroundColor = "#450000";
+            powerLed.style.backgroundColor = "#ff0000";
             powerLed.style.boxShadow = "none";
             audioAssets.estatica.pause();
             audioAssets.artista.pause();

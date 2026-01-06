@@ -5,7 +5,7 @@
             <img src="media/img/solo.jpg" alt="Jose Luis Arriola">
         </div>
         <div class="bio-box">
-            <h1 class="text-5xl font-black mb-4 text-amber-500 uppercase tracking-tighter">Jose Luis Arriola
+            <h1 class="text-5xl font-black mb-4 text-amber-500 uppercase tracking-tighter">Jose Luis <span class="text-amber-200">Arriola</span>
             </h1>
             <p class="text-lg text-zinc-300 leading-relaxed">
                 Bienvenidos a la frecuencia de Jose Luis Arriola, donde el rock, candombe, bossa y folklore se

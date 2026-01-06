@@ -5,8 +5,8 @@
         <div class="button-bezel bg-[#1a0f08] p-1.5 rounded shadow-inner">
             <button id="powerBtn" class="push-button">PWR</button>
         </div>
-        <p class="text-[10px] uppercase font-bold text-[#8d6e63] hidden min-[771px]:block">Power</p>
-        <span id="powerLed" class="w-1.5 h-1.5 rounded-full bg-[#450000]"></span>
+        <p class="text-[10px] uppercase font-bold text-[#8d6e63] hidden min-[771px]:block">Señal</p>
+        <span id="powerLed" class="w-1.5 h-1.5 rounded-full bg-[#ff0000]"></span>
     </div>
 
     <div class="flex-1 w-full max-w-4xl">

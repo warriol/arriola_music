@@ -20,7 +20,6 @@ class GaleriaController {
 
     public function guardarAlbum() {
         header('Content-Type: application/json');
-
         $nombre = $_POST['nombre'] ?? '';
         $descripcion = $_POST['descripcion'] ?? '';
 
@@ -58,18 +57,20 @@ class GaleriaController {
 
         $albumId = $_POST['album_id'] ?? null;
         if (!$albumId) {
-            echo json_encode(["status" => "error", "message" => "Debe seleccionar un álbum"]);
+            echo json_encode(["status" => "error", "message" => "Selecciona un álbum"]);
             return;
         }
 
         if (!isset($_FILES['imagenes']) || empty($_FILES['imagenes']['name'][0])) {
-            echo json_encode(["status" => "error", "message" => "No se detectaron archivos"]);
+            echo json_encode(["status" => "error", "message" => "No hay archivos"]);
             return;
         }
 
         $archivos = $_FILES['imagenes'];
         $exitos = 0;
         $dirDestino = __DIR__ . "/../../media/galeria/";
+
+        if (!is_dir($dirDestino)) mkdir($dirDestino, 0777, true);
 
         for ($i = 0; $i < count($archivos['name']); $i++) {
             if ($archivos['error'][$i] !== UPLOAD_ERR_OK) continue;
@@ -80,12 +81,7 @@ class GaleriaController {
             $tmpPath = $archivos['tmp_name'][$i];
             $filesize = $archivos['size'][$i];
 
-            // OPTIMIZACIÓN: Si pesa más de 1MB (1,048,576 bytes)
-            if ($filesize > 1048576) {
-                $this->optimizarImagen($tmpPath, $rutaCompleta, $ext);
-            } else {
-                move_uploaded_file($tmpPath, $rutaCompleta);
-            }
+            $this->procesarImagen($tmpPath, $rutaCompleta, $ext, $filesize > 1048576);
 
             $datos = [
                 'album_id' => $albumId,
@@ -97,52 +93,66 @@ class GaleriaController {
             if ($this->modelo->crear($datos)) $exitos++;
         }
 
-        echo json_encode(["status" => "success", "message" => "Se han sintonizado $exitos imágenes correctamente."]);
+        echo json_encode(["status" => "success", "message" => "Se sintonizaron $exitos imágenes correctamente."]);
     }
 
-    private function optimizarImagen($origen, $destino, $ext) {
-        list($ancho, $alto) = getimagesize($origen);
+    private function procesarImagen($origen, $destino, $ext, $debeRedimensionar) {
 
-        $maxDimension = 1600; // Límite de resolución para web
-        $nuevoAncho = $ancho;
-        $nuevoAlto = $alto;
-
-        if ($ancho > $maxDimension || $alto > $maxDimension) {
-            if ($ancho > $alto) {
-                $nuevoAncho = $maxDimension;
-                $nuevoAlto = floor($alto * ($maxDimension / $ancho));
-            } else {
-                $nuevoAlto = $maxDimension;
-                $nuevoAncho = floor($ancho * ($maxDimension / $alto));
-            }
-        }
-
-        $imgResized = imagecreatetruecolor($nuevoAncho, $nuevoAlto);
-
-        // Carga según extensión
         switch ($ext) {
-            case 'jpg': case 'jpeg': $imgSource = imagecreatefromjpeg($origen); break;
-            case 'png':
-                $imgSource = imagecreatefrompng($origen);
-                imagealphablending($imgResized, false);
-                imagesavealpha($imgResized, true);
-                break;
-            case 'webp': $imgSource = imagecreatefromwebp($origen); break;
+            case 'jpg': case 'jpeg': $imgSource = @imagecreatefromjpeg($origen); break;
+            case 'png': $imgSource = @imagecreatefrompng($origen); break;
+            case 'webp': $imgSource = @imagecreatefromwebp($origen); break;
             default: return move_uploaded_file($origen, $destino);
         }
 
-        imagecopyresampled($imgResized, $imgSource, 0, 0, 0, 0, $nuevoAncho, $nuevoAlto, $ancho, $alto);
+        if (!$imgSource) return move_uploaded_file($origen, $destino);
 
-        // Guardado con compresión (75%)
-        if ($ext == 'png') {
-            imagepng($imgResized, $destino, 7);
-        } elseif ($ext == 'webp') {
-            imagewebp($imgResized, $destino, 75);
-        } else {
-            imagejpeg($imgResized, $destino, 75);
+        if ($ext === 'jpg' || $ext === 'jpeg') {
+            $exif = @exif_read_data($origen);
+            if ($exif && isset($exif['Orientation'])) {
+                switch ($exif['Orientation']) {
+                    case 3: $imgSource = imagerotate($imgSource, 180, 0); break;
+                    case 6: $imgSource = imagerotate($imgSource, -90, 0); break;
+                    case 8: $imgSource = imagerotate($imgSource, 90, 0); break;
+                }
+            }
         }
 
-        imagedestroy($imgResized);
+        $anchoOriginal = imagesx($imgSource);
+        $altoOriginal = imagesy($imgSource);
+
+        $nuevoAncho = $anchoOriginal;
+        $nuevoAlto = $altoOriginal;
+
+        if ($debeRedimensionar) {
+            $maxDimension = 1600;
+            if ($anchoOriginal > $maxDimension || $altoOriginal > $maxDimension) {
+                if ($anchoOriginal > $altoOriginal) {
+                    $nuevoAncho = $maxDimension;
+                    $nuevoAlto = floor($altoOriginal * ($maxDimension / $anchoOriginal));
+                } else {
+                    $nuevoAlto = $maxDimension;
+                    $nuevoAncho = floor($anchoOriginal * ($maxDimension / $altoOriginal));
+                }
+            }
+        }
+
+        $imgFinal = imagecreatetruecolor($nuevoAncho, $nuevoAlto);
+
+        if ($ext === 'png' || $ext === 'webp') {
+            imagealphablending($imgFinal, false);
+            imagesavealpha($imgFinal, true);
+        }
+
+        imagecopyresampled($imgFinal, $imgSource, 0, 0, 0, 0, $nuevoAncho, $nuevoAlto, $anchoOriginal, $altoOriginal);
+
+        switch ($ext) {
+            case 'jpg': case 'jpeg': imagejpeg($imgFinal, $destino, 80); break;
+            case 'png': imagepng($imgFinal, $destino, 7); break;
+            case 'webp': imagewebp($imgFinal, $destino, 80); break;
+        }
+
+        imagedestroy($imgFinal);
         imagedestroy($imgSource);
     }
 
