@@ -20,7 +20,6 @@ try {
     <?php
     include_once 'frontend/templates/meta.php';
     ?>
-    <title><?php echo $ajustes['nombre_sitio'] ?? 'Jose Luis Arriola - Sintonía Artística'; ?></title>
     <link rel="icon" href="media/img/favicon.png" type="image/x-icon">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="frontend/assets/css/main.css">

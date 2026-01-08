@@ -64,7 +64,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (isPowerOn) {
             powerLed.style.backgroundColor = "#22c55e";
-            powerLed.style.boxShadow = "0 0 10px #ff0000";
+            powerLed.style.boxShadow = "0 0 10px #36c55a";
             iniciarAudioSistema();
             if (currentSectionIndex !== -1) sintonizarCancion(currentSectionIndex);
         } else {

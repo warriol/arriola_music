@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    ARCHIVO: sitemap.xml
+    Descripción: Mapa del sitio para facilitar la indexación de las frecuencias principales.
+-->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    <!-- Frecuencia Principal: Inicio -->
+    <url>
+        <loc>https://arriolamusica.com.ar/</loc>
+        <lastmod><?php echo date('Y-m-d'); ?></lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>1.0</priority>
+    </url>
+
+    <!-- Frecuencia: Galería (Si es una URL independiente o anclaje) -->
+    <url>
+        <loc>https://arriolamusica.com.ar/#s2</loc>
+        <lastmod><?php echo date('Y-m-d'); ?></lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <!-- Frecuencia: Tour -->
+    <url>
+        <loc>https://arriolamusica.com.ar/#s3</loc>
+        <lastmod><?php echo date('Y-m-d'); ?></lastmod>
+        <changefreq>daily</changefreq>
+        <priority>0.9</priority>
+    </url>
+
+    <!-- Frecuencia: Multimedia -->
+    <url>
+        <loc>https://arriolamusica.com.ar/#s5</loc>
+        <lastmod><?php echo date('Y-m-d'); ?></lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.7</priority>
+    </url>
+</urlset>
