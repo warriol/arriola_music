@@ -4,6 +4,21 @@
  * Función: Punto de entrada principal. Orquesta la carga de plantillas y vistas.
  */
 
+// Establecemos la zona horaria del artista (Argentina/Buenos Aires)
+date_default_timezone_set('America/Argentina/Buenos_Aires');
+
+// Fecha de lanzamiento: 11 de Enero a las 00:00
+$fechaLanzamiento = strtotime('2026-01-11 00:00:00');
+$ahora = time();
+
+// Si aún no es la hora, cargamos el contador y detenemos el script
+if ($ahora < $fechaLanzamiento) {
+    include 'contador.php';
+    exit;
+}
+
+// --- Si ya es la fecha, continúa la carga normal del sitio ---
+
 require_once 'backend/autoload.php';
 
 try {
