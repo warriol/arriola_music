@@ -6,10 +6,10 @@
 
 date_default_timezone_set('America/Argentina/Buenos_Aires');
 
-$fechaLanzamiento = strtotime('2025-01-11 00:00:00');
+$fechaLanzamiento = strtotime('2026-01-11 00:00:00');
 $ahora = time();
 
-$v = "1.2.14";
+$v = "1.2.15";
 
 if ($ahora < $fechaLanzamiento) {
     include 'contador.php';
