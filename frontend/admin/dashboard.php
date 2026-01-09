@@ -23,7 +23,7 @@ $eventos = $tourModel->listar(false);
 $totalEventos = is_array($eventos) ? count($eventos) : 0;
 
 $galeriaModel = new Galeria();
-$fotos = $galeriaModel->listar(false);
+$fotos = $galeriaModel->getAlbumes(false);
 $totalFotos = is_array($fotos) ? count($fotos) : 0;
 ?>
 <!DOCTYPE html>
@@ -34,6 +34,7 @@ $totalFotos = is_array($fotos) ? count($fotos) : 0;
     ?>
     <title>Panel de Control - Sintonía Artística</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="icon" href="../../media/img/favicon.png" type="image/x-icon">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&display=swap');
         body { font-family: 'Courier Prime', monospace; background: #0f0f0f; color: #fdf2d9; }

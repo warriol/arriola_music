@@ -1,15 +1,36 @@
-RewriteEngine On
+# Descripción: Forzar HTTPS y proteger archivos sensibles.
+ RewriteEngine On
+ RewriteBase /arriola_music/
 
-RewriteCond %{REQUEST_URI} \.(css|js|png|jpg|jpeg|gif|svg|webp|ico|woff|woff2|ttf|mp3|wav|ogg)$ [NC]
-RewriteRule ^ - [L]
+ # Forzar HTTPS
+ RewriteCond %{HTTPS} off
+ RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 
-RewriteCond %{REQUEST_URI} /arriola_music/index\.php$ [NC]
-RewriteRule ^ - [L]
+ RewriteCond %{REQUEST_URI} \.(css|js|png|jpg|jpeg|gif|svg|webp|ico|woff|woff2|ttf|mp3|wav|ogg)$ [NC]
+ RewriteRule ^ - [L]
 
-RewriteCond %{REQUEST_URI} ^/arriola_music/frontend/admin/(login|configuracion|dashboard|galeria|tour|usuarios)\.php$ [NC]
-RewriteRule ^ - [L]
+ RewriteCond %{REQUEST_URI} /arriola_music/index\.php$ [NC]
+ RewriteRule ^ - [L]
 
-RewriteCond %{REQUEST_URI} ^/arriola_music/$
-RewriteRule ^ - [L]
+ RewriteCond %{REQUEST_URI} ^/arriola_music/frontend/admin/(login|configuracion|dashboard|galeria|tour|usuarios)\.php$ [NC]
+ RewriteRule ^ - [L]
 
-RewriteRule ^.*$ /arriola_music/index.php [L,R=302]
+ RewriteCond %{REQUEST_URI} ^/arriola_music/$
+ RewriteRule ^ - [L]
+
+ RewriteRule ^.*$ /arriola_music/index.php [L,R=302]
+
+ # Protección de archivos sensibles
+ <Files .env>
+ Order allow,deny
+ Deny from all
+ </Files>
+
+ <Files debug.log>
+ Order allow,deny
+ Deny from all
+ </Files>
+
+ # Evitar listado de directorios
+
+ Options -Indexes

@@ -18,33 +18,62 @@ class Galeria extends \class\Config {
         return $this->secretKey;
     }
 
-    public function listar($soloVisibles = true) {
+    public function getAlbumes($soloVisibles = true) {
         try {
-            $sql = "SELECT * FROM galeria";
-            if ($soloVisibles) {
-                $sql .= " WHERE visible = 1";
-            }
-            $sql .= " ORDER BY orden ASC, id DESC";
+            $sql = "SELECT a.*, 
+                    (SELECT url_imagen FROM galeria WHERE album_id = a.id AND visible = 1 LIMIT 1) as portada 
+                    FROM albumes a";
+
+            if ($soloVisibles) $sql .= " WHERE a.visible = 1";
+            $sql .= " ORDER BY a.id DESC";
+
             $stmt = $this->conexion->prepare($sql);
             $stmt->execute();
             return $stmt->fetchAll();
         } catch (PDOException $e) {
-            $this->debug("DB_ERROR_GALERIA", $e->getMessage());
+            $this->debug("DB_ERROR_ALBUMES", $e->getMessage());
+            return [];
+        }
+    }
+
+
+    public function crearAlbum($nombre, $descripcion = '') {
+        try {
+            $sql = "INSERT INTO albumes (nombre, descripcion) VALUES (:nom, :des)";
+            $stmt = $this->conexion->prepare($sql);
+            return $stmt->execute([':nom' => $nombre, ':des' => $descripcion]);
+        } catch (PDOException $e) {
+            return false;
+        }
+    }
+
+    public function listarPorAlbum($albumId, $soloVisibles = true) {
+        try {
+            $sql = "SELECT * FROM galeria WHERE album_id = :aid";
+            if ($soloVisibles) $sql .= " AND visible = 1";
+            $sql .= " ORDER BY orden ASC, id DESC";
+
+            $stmt = $this->conexion->prepare($sql);
+            $stmt->execute([':aid' => $albumId]);
+            return $stmt->fetchAll();
+        } catch (PDOException $e) {
             return [];
         }
     }
 
     public function crear($datos) {
         try {
-            $sql = "INSERT INTO galeria (url_imagen, pie_de_foto, visible) VALUES (:url, :pie, :vis)";
+            $sql = "INSERT INTO galeria (album_id, url_imagen, pie_de_foto, visible) 
+                    VALUES (:aid, :url, :pie, :vis)";
             $stmt = $this->conexion->prepare($sql);
             return $stmt->execute([
+                ':aid' => $datos['album_id'],
                 ':url' => $datos['url_imagen'],
                 ':pie' => $datos['pie_de_foto'],
                 ':vis' => $datos['visible'] ?? 1
             ]);
         } catch (PDOException $e) {
-            $this->debug("DB_ERROR_INSERT", $e->getMessage());
+            $this->debug("DB_ERROR_GALERIA_INSERT", $e->getMessage());
             return false;
         }
     }

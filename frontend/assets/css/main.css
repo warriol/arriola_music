@@ -141,7 +141,7 @@
         .push-button {
             width: 50px;
             height: 35px;
-            background: linear-gradient(180deg, #444 0%, #222 100%);
+            /*background: linear-gradient(180deg, #444 0%, #222 100%);*/
             border: 1px solid #111;
             border-radius: 2px;
             cursor: pointer;
@@ -150,23 +150,58 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            color: #666;
+            /*color: #666;*/
+            background-color: #b91c1c; /* Rojo Ámbar intenso */
+            color: white;
+            box-shadow: 0 4px 0 #7f1d1d, 0 0 15px rgba(185, 28, 28, 0.4);
             font-size: 0.6rem;
             font-weight: bold;
         }
 
         .push-button:active,
         .push-button.is-pushed {
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
             transform: translateY(3px);
-            box-shadow: 0 1px 0 #000, 0 2px 5px rgba(0, 0, 0, 0.8);
+            /*box-shadow: 0 1px 0 #000, 0 2px 5px rgba(0, 0, 0, 0.8);
             background: linear-gradient(180deg, #222 0%, #333 100%);
-            color: #aaa;
+            color: #aaa;*/
+            background-color: #22c55e; /* Verde brillante */
+            color: #052e16;
+            box-shadow: 0 4px 0 #14532d, 0 0 20px rgba(34, 197, 94, 0.6);
         }
 
         /* --- Perilla de Sintonía --- */
+        .knob-container {
+            position: relative;
+            width: 55px;
+            height: 60px;
+        }
+
+        .knob-shadow {
+            position: absolute;
+            inset: 0;
+            border-radius: 9999px;
+            background: rgba(0,0,0,0.7);
+            filter: blur(4px);
+            transform: translate(9px, 9px);
+            pointer-events: none;
+        }
+
+        .knob-indicator {
+            position: absolute;
+            top: 4px;
+            left: 50%;
+            width: 3px;
+            height: 12px;
+            background-color: #ffb347;
+            border-radius: 9999px;
+            transform: translateX(-50%);
+            z-index: 500;
+        }
+
         .knob {
-            width: 75px;
-            height: 75px;
+            width: 55px;
+            height: 55px;
             background:
                 repeating-conic-gradient(from 0deg, #2a2a2a 0deg 2deg, #111 2deg 4deg),
                 radial-gradient(circle, transparent 65%, rgba(0, 0, 0, 0.8) 100%);
@@ -176,7 +211,6 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.6), inset 0 2px 3px rgba(255, 255, 255, 0.1);
         }
 
         .knob::before {
@@ -187,7 +221,6 @@
             background: linear-gradient(135deg, #8a6d3b 0%, #d4af37 50%, #f9e29f 100%);
             border-radius: 50%;
             border: 2px solid #1a1a1a;
-            box-shadow: inset 0 2px 4px rgba(255, 255, 255, 0.4), 0 2px 5px rgba(0, 0, 0, 0.5);
             z-index: 2;
         }
 
@@ -243,35 +276,30 @@
         }
 
         #s1 {
-            background-image: url('../../../media/img/img_01.jpg');
             background-attachment: fixed;
             background-position: center;
             background-size: cover;
         }
 
         #s3 {
-            background-image: url('../../../media/img/img_03.jpg');
             background-attachment: fixed;
             background-position: center;
             background-size: cover;
         }
 
         #s4 {
-            background-image: url('../../../media/img/img_04.jpg');
             background-attachment: fixed;
             background-position: center;
             background-size: cover;
         }
 
         #s5 {
-            background-image: url('../../../media/img/img_02.jpg');
             background-attachment: fixed;
             background-position: center;
             background-size: cover;
         }
 
         #s6 {
-            background-image: url('../../../media/img/img_06.jpg');
             background-attachment: fixed;
             background-position: center;
             background-size: cover;
@@ -427,7 +455,7 @@
 
         /* Contenedor tipo Panel para Spotify */
         .spotify-panel {
-            background: #1a0f08;
+            background: rgba(26, 15, 8, 0.7);
             padding: 20px;
             border: 8px solid #2d1b0e;
             border-radius: 12px;
@@ -441,7 +469,7 @@
             width: 90%;
             max-width: 1000px;
             height: 600px;
-            background: #1a0f08;
+            background: rgba(26, 15, 8, 0.7);
             border: 12px solid #2d1b0e;
             border-radius: 8px;
             box-shadow: 0 30px 60px rgba(0, 0, 0, 0.8), inset 0 0 40px rgba(0, 0, 0, 0.6);

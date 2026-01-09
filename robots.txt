@@ -1,0 +1,14 @@
+User-agent: *
+
+# Permitir indexación de todo el contenido público
+Allow: /
+
+# Bloquear el acceso a la lógica del servidor y archivos privados
+Disallow: /backend/
+Disallow: /frontend/admin/
+Disallow: /arriola_music/backend/
+Disallow: /.env
+Disallow: /debug.log
+
+# Indicar la ubicación del mapa del sitio
+Sitemap: https://www.google.com/search?q=https://arriolamusica.com.ar/sitemap.xml
