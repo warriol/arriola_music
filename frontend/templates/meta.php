@@ -6,7 +6,7 @@ $siteKeywords = "Jose Luis Arriola, Rock, Candombe, Bossa Nova, Música Interact
 $siteUrl = "https://arriolamusica.com.ar/";
 $authorName = "Wilson Denis Arriola";
 $authorUrl = "https://warriol.com.uy/";
-$ogImage = $siteUrl . "/media/img/og-preview.jpg"; // Imagen recomendada 1200x630
+$ogImage = $siteUrl . "/media/img/og-preview.jpg?v=<?php echo $v; ?>"; // Imagen recomendada 1200x630
 ?>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
