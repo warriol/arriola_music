@@ -597,11 +597,16 @@
             letter-spacing: 1px;
         }
 
+        .linktree-btn:hover {
+            color: var(--needle-color);
+            transform: scale(1.1);
+        }
+
         .footer-video-frame {
             width: 90%;
             max-width: 576px;
             height: 332px;
-            margin: 0 auto 40px auto;
+            margin: 0 auto 130px auto;
             background: #000;
             border: 8px solid #3d2b1f;
             border-radius: 4px;
@@ -644,8 +649,9 @@
         }
 
         .engraved-text a:hover {
-            color: #8a3600;
+            color: #fde69d;
             text-decoration: underline;
+            transform: scale(1.2);
         }
 
         /* --- RESPONSIVIDAD REFINADA --- */
