@@ -29,9 +29,7 @@ $totalFotos = is_array($fotos) ? count($fotos) : 0;
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <?php
-    include_once '../templates/meta.php';
-    ?>
+    <meta charset="UTF-8">
     <title>Panel de Control - Sintonía Artística</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="icon" href="../../media/img/favicon.png" type="image/x-icon">
@@ -116,6 +114,20 @@ $totalFotos = is_array($fotos) ? count($fotos) : 0;
             </div>
             <p class="text-xl font-bold mb-2 text-green-500 uppercase">Sintonizado</p>
             <p class="text-[10px] text-zinc-500">Última actualización de señal: <?php echo date('d/m/Y'); ?></p>
+        </div>
+
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 relative z-10">
+
+        <div class="mt-10 admin-card p-6 rounded-lg shadow-xl" style="width: 300px; height: 350px;">
+            <div class="flex justify-between items-start mb-4">
+                <h3 class="font-bold text-amber-200 uppercase tracking-widest text-sm">Rastreo de visitas</h3>
+                <span class="text-2xl opacity-50">🌍</span>
+            </div>
+            <div class="col-md-4 text-center">
+                <script type="text/javascript" id="clstr_globe" src="//clustrmaps.com/globe.js?d=6SJIPHMGhE8QBailBgpgcqSNfaRF2f_SDDIgeOnEijE"></script>
+            </div>
         </div>
 
     </div>

@@ -3,7 +3,7 @@
     <div
         class="knob-unit flex flex-col items-center gap-1 fixed bottom-4 right-4 z-50 min-[771px]:static min-[771px]:z-auto">
         <div class="button-bezel bg-[#1a0f08] p-1.5 rounded shadow-inner">
-            <button id="powerBtn" class="push-button">PWR</button>
+            <button id="powerBtn" class="push-button btn-power-off">OFF</button>
         </div>
         <p class="text-[10px] uppercase font-bold text-[#8d6e63] hidden min-[771px]:block">Señal</p>
         <span id="powerLed" class="w-1.5 h-1.5 rounded-full bg-[#ff0000]"></span>

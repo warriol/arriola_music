@@ -16,7 +16,7 @@ $albumes = $galeriaModel->getAlbumes(true);
         Frecuencias multimedia
     </h2>
 
-    <div class="multimedia-monitor-frame mt-20">
+    <div class="multimedia-monitor-frame">
         <div id="albumViewContainer" class="p-6 h-full overflow-y-auto custom-scrollbar bg-black/20">
 
             <?php if (empty($albumes)): ?>

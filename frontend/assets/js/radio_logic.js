@@ -24,15 +24,37 @@ document.addEventListener('DOMContentLoaded', () => {
     let isPowerOn = false;
     let currentSectionIndex = -1;
 
+    const style = document.createElement('style');
+    style.innerHTML = `
+        @keyframes titileoPower {
+            0% { box-shadow: 0 4px 0 #7f1d1d, 0 0 5px rgba(185, 28, 28, 0.4); opacity: 1; }
+            50% { box-shadow: 0 4px 0 #7f1d1d, 0 0 20px rgba(185, 28, 28, 0.8); opacity: 0.8; }
+            100% { box-shadow: 0 4px 0 #7f1d1d, 0 0 5px rgba(185, 28, 28, 0.4); opacity: 1; }
+        }
+        .btn-power-off.pulse-active {
+            animation: titileoPower 1.5s infinite ease-in-out;
+        }
+    `;
+    document.head.appendChild(style);
+
     function actualizarFrecuencias() {
         const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
         if (totalHeight <= 0) return;
 
-        const scrollPos = window.pageYOffset;
-        const scrollPercent = (scrollPos / totalHeight) * 100;
+        const scrollPos = window.scrollY;
+        const scrollPercent = (scrollPos / totalHeight);
 
-        if (needleContainer) needleContainer.style.left = `${Math.min(Math.max(scrollPercent, 5), 95)}%`;
-        if (tuningKnob) tuningKnob.style.transform = `rotate(${(scrollPos / totalHeight) * 1800}deg)`;
+        // --- LÓGICA VISUAL (Siempre activa) ---
+        if (needleContainer) {
+            const margin = 6;
+            const range = 100 - (margin * 2);
+            const needlePos = margin + (scrollPercent * range);
+            needleContainer.style.left = `${needlePos}%`;
+        }
+
+        if (tuningKnob) {
+            tuningKnob.style.transform = `rotate(${scrollPercent * 1800}deg)`;
+        }
 
         if (!isPowerOn) return;
 
@@ -82,15 +104,24 @@ document.addEventListener('DOMContentLoaded', () => {
         isPowerOn = !isPowerOn;
 
         if (isPowerOn) {
+            powerBtn.classList.remove('btn-power-off');
+            powerBtn.classList.remove('pulse-active');
+            powerBtn.classList.add('btn-power-on');
+            powerBtn.innerText = "ON";
+
             if (powerLed) {
                 powerLed.style.backgroundColor = "#22c55e";
                 powerLed.style.boxShadow = "0 0 10px #22c55e";
             }
 
-            audioAssets.estatica.play().catch(e => console.log("Audio estática esperando interacción..."));
-
+            audioAssets.estatica.play().catch(() => {});
             actualizarFrecuencias();
         } else {
+            powerBtn.classList.remove('btn-power-on');
+            powerBtn.classList.add('btn-power-off');
+            powerBtn.classList.add('pulse-active');
+            powerBtn.innerText = "OFF";
+
             if (powerLed) {
                 powerLed.style.backgroundColor = "#7f1d1d";
                 powerLed.style.boxShadow = "none";
@@ -106,6 +137,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     window.addEventListener('scroll', actualizarFrecuencias);
     window.addEventListener('resize', actualizarFrecuencias);
+
+    if (!isPowerOn && powerBtn) {
+        powerBtn.classList.add('pulse-active');
+    }
 
     actualizarFrecuencias();
 
