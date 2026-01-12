@@ -659,6 +659,36 @@
             text-decoration: underline;
             transform: scale(1.2);
         }
+        .spotify-panel-iframe {
+            height: 630px;
+        }
+
+        @media (max-height: 900px) {
+            .bottom-wood-base {
+                padding: 0;
+            }
+            .engraved-text {
+                position: relative;
+                bottom: 0;
+                right: 0;
+                display: block;
+                text-align: center;
+            }
+            .social-links {
+                margin-bottom: 0;
+            }
+            .linktree-btn {
+                display: none;
+            }
+
+            .multimedia-monitor-frame, .spotify-panel {
+                height: 63vh;
+            }
+
+            .spotify-panel-iframe {
+                height: 352px;
+            }
+        }
 
         /* --- RESPONSIVIDAD REFINADA --- */
         @media (max-width: 1024px) {

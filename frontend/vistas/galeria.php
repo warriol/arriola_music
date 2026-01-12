@@ -1,10 +1,9 @@
 <!-- SECCIÓN 02: GALERÍA (ID: s2) -->
 <section id="s2">
-    <div class="absolute top-24 text-center w-full">
-        <h2
-            class="text-3xl font-black tracking-widest text-amber-800 bg-black/60 inline-block px-8 py-2 border-b-2 border-amber-900">
-            GALERÍA</h2>
-    </div>
+    <h2
+        class="text-3xl font-black tracking-widest text-amber-800 bg-black/60 inline-block px-8 py-2 border-b-2 border-amber-900">
+        GALERÍA DE ARTÍSTAS</h2>
+
     <div class="flex items-center gap-8 w-full justify-center mt-12">
         <button id="prevGallery" class="nav-btn bg-zinc-700 p-2 rounded-full">◀</button>
         <div class="gallery-viewport">
