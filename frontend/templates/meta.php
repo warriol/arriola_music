@@ -14,9 +14,6 @@ $ogImage = $siteUrl . "/media/img/og-preview.jpg?v=<?php echo $v; ?>"; // Imagen
 <meta name="keywords" content="Jose Luis Arriola, músico, compositor, argentino, discografía, tour, redes">
 <meta name="author" content="Wilson Denis Arriola">
 
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <!-- Metadatos Estándar -->
 <title><?php echo $siteTitle; ?></title>
 <meta name="description" content="<?php echo $siteDesc; ?>">

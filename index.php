@@ -9,7 +9,7 @@ date_default_timezone_set('America/Argentina/Buenos_Aires');
 $fechaLanzamiento = strtotime('2026-01-11 00:00:00');
 $ahora = time();
 
-$v = "1.2.16";
+$v = "1.2.20";
 
 if ($ahora < $fechaLanzamiento) {
     include 'contador.php';
